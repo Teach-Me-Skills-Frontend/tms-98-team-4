@@ -1,0 +1,8 @@
+const ModalAction = {
+	addBan: "addBan",
+	deleteBan: "deleteBan",
+};
+
+const ModalStatus = {
+	isBan: false,
+};
