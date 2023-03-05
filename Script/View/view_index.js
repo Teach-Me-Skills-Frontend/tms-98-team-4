@@ -19,9 +19,14 @@ function createPinterestAppCard(form, CardTable) {
 	);
 	cardHeader.append(form);
 
-	// const cardBody = document.createElement("div");
-	// cardBody.classList.add("card-body");
-	// cardBody.append(filterContainer, taskTable);
+	const cardBody = document.createElement("div");
+	cardBody.classList.add(
+		"container-sm",
+		"d-flex",
+		"justify-content-between",
+		"flex-row g-3"
+	);
+	cardBody.append(filterContainer, taskTable);
 
 	// const cardFooter = document.createElement("div");
 	// cardFooter.classList.add("card-footer");
