@@ -1,58 +1,15 @@
-//пишем класс прорисовки всего приложения (Cards, Pin, Search)//
+//пишем класс прорисовки всего приложения (Search, Board, Cards)//
 
-// import { TaskAction } from "../constants.js";
-// import { TaskForm } from "./TaskForm/TaskForm.js";
-// import { TaskStatistics } from "./TaskStatistics/TaskStatistics.js";
-// import { TaskFilter } from "./TaskFilter/TaskFilter.js";
-// import { TaskTable } from "./TaskTable/TaskTable.js";
+import { CardList } from "./CardList/CardList.js";
+import { header } from "./Header/header.js";
 
-function createPinterestAppCard(form, CardTable) {
-	const card = document.createElement("div");
-	card.classList.add("card", "rounded-3");
 
-	const cardHeader = document.createElement("div");
-	cardHeader.classList.add(
-		"container-sm",
-		"d-flex",
-		"justify-content-between",
-		"header_spacing"
-	);
-	cardHeader.append(form);
+function createPinterestAppCard(header, CardTable) { }
 
-	const cardBody = document.createElement("div");
-	cardBody.classList.add(
-		"container-sm",
-		"d-flex",
-		"justify-content-between",
-		"flex-row g-3"
-	);
-	cardBody.append(filterContainer, taskTable);
-
-	// const cardFooter = document.createElement("div");
-	// cardFooter.classList.add("card-footer");
-	// cardFooter.append(taskStatistics);
-
-	// card.append(cardHeader, cardBody, cardFooter);
-
-	// return card;
-}
 
 export class CardView {
-	constructor({
-		// onFilterChange,
-		// onTaskAction,
-		containerId = "root",
-		filter,
-		tasks,
-		statistics,
-	}) {
-		this.addTaskForm = new TaskForm({
-			onTaskAdd: (taskText) => onTaskAction(TaskAction.Add, taskText),
-		});
-		this.taskFilter = new TaskFilter({ filter, onFilterChange });
+	constructor({ containerId = "root" }) {
 		this.taskTable = new TaskTable({ tasks, onTaskAction });
-		this.taskStatistics = new TaskStatistics(statistics);
-
 		const container = document.getElementById(containerId);
 		const card = createTaskAppCard(
 			this.addTaskForm.form,
