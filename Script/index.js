@@ -1,3 +1,4 @@
 import { CardController } from "./app_controller.js";
 
-new CardController("root");
+const controller = new CardController("root");
+controller.initialize();

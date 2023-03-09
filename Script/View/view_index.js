@@ -1,13 +1,13 @@
 //пишем класс прорисовки всего приложения (Search, Board, Cards)//
 
 import { CardList } from "./CardList/CardList.js";
-import { header } from "./Header/header.js";
+// import { header } from "./Header/header.js";
 
 
-function createPinterestAppCard(header, CardList) {
+function createPinterestAppCard(CardList) { //пробросить header в функцию, когда будет готов
 	const appCard = document.createElement('div');
 	appCard.classList.add('app-card');
-	appCard.append(header, CardList);
+	appCard.append(CardList); //пробросить header в append, когда будет готов
 	return appCard;
 }
 
@@ -16,7 +16,7 @@ export class CardView {
 	constructor({ cards, containerId = 'root' }) {
 		this.CardList = new CardList(cards);
 
-		const appCard = createPinterestAppCard(header, this.CardList.cardContainer);
+		const appCard = createPinterestAppCard(this.CardList.cardContainer); //пробросить header в appCard, когда будет готов
 		const rootContainer = document.getElementById(containerId);
 		rootContainer.append(appCard);
 	}
@@ -25,6 +25,4 @@ export class CardView {
     {
         this.CardList.renderCards(cards);
     }
-
-	
 }
