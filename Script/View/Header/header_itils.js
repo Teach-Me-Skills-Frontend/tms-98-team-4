@@ -1,4 +1,4 @@
-import { createSearchInput, createBtn, createBoardItem } from '../view_utils.js';
+import { createSearchInput, createBtn, createBoard } from '../view_utils.js';
 import { AddBtnNames } from '../view_constants.js';
 
 export function createHeader() {
@@ -15,14 +15,9 @@ export function createHeader() {
 
     searchForm.append(searchInput);
 
-    const boardBtn = createBtn(AddBtnNames.Boards);
-    boardBtn.classList.add('btn', 'btn-dark', 'dropdown-toggle');
-    boardBtn.setAttribute('data-bs-toggle', 'dropdown');
+    const boardDropContainer = createBoard();
 
-    const boeardItem = createBoardItem();
-    boardBtn.append(boeardItem);
-
-    header.append(btnLabel, searchForm, boardBtn);
+    header.append(btnLabel, searchForm, boardDropContainer);
 
     return header;
 }

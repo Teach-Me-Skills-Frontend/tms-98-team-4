@@ -4,7 +4,7 @@ import { AddBtnNames, boardnames } from './view_constants.js';
 
 export function createBtn(title, buttonProps) {
     const button = document.createElement('button');
-    input.classList.add('btn');
+    button.classList.add('btn');
     button.textContent = title;
 
     for (const key in buttonProps) {
@@ -18,23 +18,49 @@ export function createSearchInput() {
     const input = document.createElement('input');
     input.setAttribute('type', 'search');
     input.setAttribute('placeholder', 'search...');
+    input.setAttribute('name', 'input');
     input.classList.add('form-control', 'text-center');
 
     return input;
 }
 
-export function createBoardItem() {
-    const boardBtn = createBtn(AddBtnNames.Boards);
-    boardBtn.classList.add('btn', 'btn-dark', 'dropdown-toggle');
-    boardBtn.setAttribute('data-bs-toggle', 'dropdown');
+
+export function createBoard() {
+    const boardContainer = document.createElement('div');
+    boardContainer.classList.add('dropdown');
+
+    const boardBtn = document.createElement('button');
+    boardBtn.classList.add('dropbtn');
+    boardBtn.textContent = `${AddBtnNames.pickBoard}`;
+
+    //временно событие, добавлю через метод в class header
+    boardBtn.addEventListener('click', () => {
+        boardDrop.classList.toggle('show');
+    })
+
+
+    boardBtn.setAttribute('name', 'boardPick');
+    boardBtn.setAttribute('data-action', 'showBoards');
+
+    const boardDrop = document.createElement('div');
+    boardDrop.classList.add('dropdown-content');
+    boardDrop.setAttribute('id', 'myDropdown');
+
+    console.log(document.getElementById('myDropdown'));
+
 
     for (const name of boardnames) {
-        const board = document.createElement('li');
-        boardItem.classList.add('dropdown-item');
-        board.textContent = name;
-        boardBtn.append(board)
+        const boardItem = document.createElement('a');
+        boardItem.setAttribute('href', '#');
+        boardItem.textContent = name;
+        boardDrop.append(boardItem);
     }
-    return boardBtn;
+
+    boardContainer.append(boardBtn, boardDrop);
+    return boardContainer;
 }
+
+
+
 
 

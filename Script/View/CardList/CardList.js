@@ -5,8 +5,6 @@ export class CardList {
         this.cardContainer = document.createElement('div');
         this.cardContainer.setAttribute('id', 'card-container');
         this.cardContainer.classList.add("container-sm", "d-flex", "flex-wrap", "justify-content-between", "flex-row", "g-3");
-
-        this.renderCards(cards);
     }
 
     renderCards = (cards) =>

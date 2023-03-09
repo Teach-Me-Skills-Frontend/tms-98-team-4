@@ -2,22 +2,18 @@ import { createHeader } from './header_itils.js';
 
 
 export class Header {
-    constructor({ onTaskAdd }) {
-        this.form = createHeader();
-        this.onTaskAdd = onTaskAdd;
-
-        this.form.addEventListener('submit', this.onFormSubmit);
+    constructor() {
+        this.cardContainer = createHeader();
+        // this.onInputSearch = onInputSearch;
+        // this.form.addEventListener('submit', this.onFormSubmit);
+        // this.cardContainer.addEventListener('submit', this.onFormSubmit);
+        this.cardContainer.addEventListener('click', this.onBoards);
     }
 
-    onFormSubmit = (event) => {
-        event.preventDefault();
-        const { value } = this.form.elements[AddFormNames.TaskInput];
-
-        const formattedValue = value.trim();
-
-        if (formattedValue) {
-            this.onTaskAdd(formattedValue);
-            this.form.reset();
-        }
-    };
+    // onBoards = (event) => {
+    //     if (event.target.dataset.action === "showBoards") {
+    //         this.cardContainer.childNodes.classList.toggle('show');
+    //     }
+    // }
 }
+
