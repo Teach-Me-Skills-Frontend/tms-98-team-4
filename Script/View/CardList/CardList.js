@@ -1,13 +1,19 @@
 import { createCard } from './CardList_utils.js';
-import { getData } from '../../Model/model_index.js';
-
 
 export class CardList {
-    constructor() {
-        // this.container = document.getElementById('card-container');
-        // this.container.classList.add("container-sm", "d-flex", "flex-wrap", "justify-content-between", "flex-row", "g-3");
-        this.data = getData();
+    constructor(cards) {
+        this.cardContainer = document.createElement('div');
+        this.cardContainer.setAttribute('id', 'card-container');
+        this.cardContainer.classList.add("container-sm", "d-flex", "flex-wrap", "justify-content-between", "flex-row", "g-3");
+
+        this.renderCards(cards);
     }
 
-
+    renderCards = (cards) =>
+    {
+        this.cardContainer.innerHTML = '';
+        cards.forEach(picture => {
+            this.cardContainer.append(createCard(picture));
+        })
+    }
 }
