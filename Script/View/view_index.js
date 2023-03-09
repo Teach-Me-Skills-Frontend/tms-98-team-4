@@ -4,28 +4,27 @@ import { CardList } from "./CardList/CardList.js";
 import { header } from "./Header/header.js";
 
 
-function createPinterestAppCard(header, CardTable) { }
+function createPinterestAppCard(header, CardList) {
+	const appCard = document.createElement('div');
+	appCard.classList.add('app-card');
+	appCard.append(header, CardList);
+	return appCard;
+}
 
 
 export class CardView {
-	constructor({ containerId = "root" }) {
-		this.taskTable = new TaskTable({ tasks, onTaskAction });
-		const container = document.getElementById(containerId);
-		const card = createTaskAppCard(
-			this.addTaskForm.form,
-			this.taskFilter.container,
-			this.taskTable.table,
-			this.taskStatistics.container
-		);
+	constructor({ cards, containerId = 'root' }) {
+		this.CardList = new CardList(cards);
 
-		container.append(card);
+		const appCard = createPinterestAppCard(header, this.CardList.cardContainer);
+		const rootContainer = document.getElementById(containerId);
+		rootContainer.append(appCard);
 	}
 
-	renderTasks = (tasks) => {
-		this.taskTable.renderTasks(tasks);
-	};
+	renderCards = (cards) =>
+    {
+        this.CardList.renderCards(cards);
+    }
 
-	updateStatistics = (statistics) => {
-		this.taskStatistics.setProgress(statistics);
-	};
+	
 }
