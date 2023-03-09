@@ -26,9 +26,3 @@ export function createCard(cardParams) {
 
     return card;
 }
-
-const root = document.getElementById('root');
-const cardContainer = document.createElement('div');
-cardContainer.setAttribute('id', 'card-container');
-cardContainer.classList.add("container-sm", "d-flex", "flex-wrap", "justify-content-between", "flex-row", "g-3");
-root.append(cardContainer);
