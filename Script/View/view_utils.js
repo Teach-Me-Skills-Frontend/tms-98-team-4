@@ -1,10 +1,10 @@
 //написать функцию прорисовки кнопки, общий вид для всех кнопок в приложении//
 //написать функцию прорисовки модального окна, общий вид для всех модалок в приложении//
-import { AddBtnNames, boardnames } from './view_constants.js';
+import { AddBtnNames, boardnames, datasetNames } from './view_constants.js';
 
 export function createBtn(title, buttonProps) {
     const button = document.createElement('button');
-    button.classList.add('btn');
+    button.classList.add('btn', 'btn-lg');
     button.textContent = title;
 
     for (const key in buttonProps) {
@@ -16,10 +16,10 @@ export function createBtn(title, buttonProps) {
 
 export function createSearchInput() {
     const input = document.createElement('input');
-    input.setAttribute('type', 'search');
+    input.setAttribute('type', 'text');
     input.setAttribute('placeholder', 'search...');
     input.setAttribute('name', 'input');
-    input.classList.add('form-control', 'text-center');
+    input.classList.add('form-control', 'text-center', 'input-gap');
 
     return input;
 }
@@ -30,14 +30,11 @@ export function createBoard() {
     boardContainer.classList.add('dropdown');
 
     const boardBtn = document.createElement('button');
-    boardBtn.classList.add('dropbtn');
+    boardBtn.classList.add('btn', 'btn-outline-success', 'btn-lg');
+    boardBtn.setAttribute('data-action', `${datasetNames.openBoard}`);
     boardBtn.textContent = `${AddBtnNames.pickBoard}`;
 
     //временно событие, добавлю через метод в class header
-    boardBtn.addEventListener('click', () => {
-        boardDrop.classList.toggle('show');
-    })
-
 
     boardBtn.setAttribute('name', 'boardPick');
     boardBtn.setAttribute('data-action', 'showBoards');
@@ -45,9 +42,6 @@ export function createBoard() {
     const boardDrop = document.createElement('div');
     boardDrop.classList.add('dropdown-content');
     boardDrop.setAttribute('id', 'myDropdown');
-
-    console.log(document.getElementById('myDropdown'));
-
 
     for (const name of boardnames) {
         const boardItem = document.createElement('a');

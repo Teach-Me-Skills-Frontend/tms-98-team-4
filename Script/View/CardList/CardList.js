@@ -7,8 +7,7 @@ export class CardList {
         this.cardContainer.classList.add("container-sm", "d-flex", "flex-wrap", "justify-content-between", "flex-row", "g-3");
     }
 
-    renderCards = (cards) =>
-    {
+    renderCards = (cards) => {
         this.cardContainer.innerHTML = '';
         cards.forEach(picture => {
             this.cardContainer.append(createCard(picture));

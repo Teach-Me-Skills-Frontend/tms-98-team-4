@@ -9,3 +9,17 @@ export const AddBtnNames = {
 export const boardnames = ['Board 1', 'Board 2', 'Board 3'];
 
 export const labelName = 'Pinterest';
+
+export const CardAction = {
+	search: 'search',
+	Delete: 'delete',
+	Complete: 'complete',
+	Undo: 'undo'
+}
+
+export const datasetNames = {
+	openBoard: 'openBoard',
+	// Delete: 'delete',
+	// Complete: 'complete',
+	// Undo: 'undo'
+}

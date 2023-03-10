@@ -6,11 +6,11 @@ export function createCard(cardParams) {
     card.id = crypto.randomUUID();
 
     const mainImg = document.createElement('img');
-    mainImg.classList.add('card-img-top');
+    mainImg.classList.add('card-img-top', 'img-fluid', 'flex-1');
     mainImg.setAttribute('src', urls.regular);
 
     const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
+    cardBody.classList.add('card-body', 'flex-0');
 
     const author = document.createElement('h5');
     author.classList.add('card-title');
