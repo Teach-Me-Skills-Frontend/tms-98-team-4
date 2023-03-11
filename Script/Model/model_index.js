@@ -1,20 +1,24 @@
-import { url } from './models_utils.js'
-
+import { url } from './models_utils.js';
+import { CardView } from "../View/view_index.js";
+import { createCard } from '../View/CardList/CardList_utils.js';
 
 
 export function getData() {
     return fetch(url)
-        .then((response) => response.json());
+        .then((response) => response.json())
+        .catch(err => alert(err))
 }
 
 export function getDataSearch(urls) {
     return fetch(urls)
-        .then((response) => response.json());
+        .then((response) => response.json())
+        .catch(err => alert(err))
 }
 
 export class CardModel {
     constructor() {
         const cards = [];
+        this.cardContainer = document.querySelectorAll('div');
     }
 
     setCards(cards) {
@@ -24,7 +28,27 @@ export class CardModel {
     getCards() {
         return this.cards.slice();
     }
-    createCard(searchCard) {
-        getDataSearch(`https://api.unsplash.com/search/photos?page=${randomPage}&query=${searchCard}&per_page=30&client_id=04ufwLfYkUW_uO9OlQOojuE9hQFxR0veEPagGYh0VGA`)
-    };
+
+    // getDataSearch(urls) {
+    //     return fetch(urls)
+    //         .then((response) => response.json());
+    // }
+
+    // createCard(urls) {
+    //     console.log(urls);
+    //     this.getDataSearch(urls)
+    //         .then(data => {
+    //             console.log(data);
+    //             this.cardContainer.innerHTML = '';
+    //             console.log(this.cardContainer);
+    //             data.results.forEach(picture => {
+    //                 this.cardContainer.append(createCard(picture))
+    //             });
+    //         })
+    // }
 }
+
+
+
+
+

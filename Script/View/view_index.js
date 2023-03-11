@@ -17,7 +17,7 @@ function createPinterestAppCard(header, cardList) { //пробросить heade
 export class CardView {
 	constructor({ cards, containerId = 'root', onHeaderAction }) {
 		this.CardList = new CardList(cards);
-		this.header = new Header({ onHeaderAction: (searchText) => onHeaderAction('input', searchText) });
+		this.header = new Header({ onHeaderSearch: (searchText) => onHeaderAction('input', searchText) });
 
 		const rootContainer = document.getElementById(containerId);
 		const appCard = createPinterestAppCard(this.header.cardContainer, this.CardList.cardContainer); //пробросить header в appCard, когда будет готов

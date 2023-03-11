@@ -11,7 +11,7 @@ export const boardnames = ['Board 1', 'Board 2', 'Board 3'];
 export const labelName = 'Pinterest';
 
 export const CardAction = {
-	search: 'search',
+	input: 'input',
 	Delete: 'delete',
 	Complete: 'complete',
 	Undo: 'undo'

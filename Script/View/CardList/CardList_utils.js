@@ -2,7 +2,7 @@ export function createCard(cardParams) {
     const { urls, alt_description, user } = cardParams;
 
     const card = document.createElement('div');
-    card.classList.add('card');
+    card.classList.add('card', 'shadow');
     card.id = crypto.randomUUID();
 
     const mainImg = document.createElement('img');

@@ -13,4 +13,5 @@ export class CardList {
             this.cardContainer.append(createCard(picture));
         })
     }
+
 }
