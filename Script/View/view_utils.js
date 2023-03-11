@@ -54,6 +54,41 @@ export function createBoard() {
     return boardContainer;
 }
 
+export function openPhoto() {
+    
+    const photos = document.querySelectorAll('.card-img-top');
+    let photoSrc;
+    photos.forEach((photo) => {
+        photo.addEventListener('click', (e) => {
+            photoSrc = e.target.src;
+            photoModal (photoSrc);
+        })
+    })
+
+    let photoModal = (src) => {
+        const modalDiv = document.createElement('div');
+        modalDiv.classList.add('modal-div');
+        const root = document.getElementById('root');
+        root.append(modalDiv);
+
+        const fullPhoto = document.createElement('img');
+        fullPhoto.setAttribute('src', src);
+        modalDiv.append(fullPhoto);
+
+        const closeBtn = document.createElement("i");
+        closeBtn.setAttribute("class", "fas fa-times close-button");
+
+        closeBtn.addEventListener('click', (e) => {
+            modalDiv.remove();
+        });
+        modalDiv.addEventListener('click', (e) => {
+            modalDiv.remove();
+        });
+
+        modalDiv.append(fullPhoto, closeBtn);
+    }
+}
+
 
 
 
