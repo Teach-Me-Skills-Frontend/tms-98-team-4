@@ -2,6 +2,7 @@ import { CardList } from "./View/CardList/CardList.js";
 import { CardView } from "./View/view_index.js";
 import { CardModel, getData, getDataSearch } from "./Model/model_index.js";
 import { CardAction } from './View/view_constants.js';
+import { openPhoto } from './View/view_utils.js';
 
 
 
@@ -36,6 +37,7 @@ export class CardController {
                     console.log(data);
                     this.view.renderCards(this.model.getCards());
                     console.log(this.model.getCards(data));
+                    openPhoto();
                 })
     }
 }

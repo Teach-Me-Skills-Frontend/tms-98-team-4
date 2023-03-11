@@ -1,4 +1,5 @@
 import { createCard } from './CardList_utils.js';
+import { CardAction } from '../../basic_constants.js'
 
 export class CardList {
     constructor(cards) {
@@ -10,8 +11,7 @@ export class CardList {
     renderCards = (cards) => {
         this.cardContainer.innerHTML = '';
         cards.forEach(picture => {
-            this.cardContainer.append(createCard(picture));
+            this.cardContainer.append(createCard(picture, {'data-card-action': CardAction.openFull}));
         })
     }
-
 }
