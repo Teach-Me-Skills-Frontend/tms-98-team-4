@@ -1,7 +1,7 @@
 import { CardList } from "./View/CardList/CardList.js";
 import { CardView } from "./View/view_index.js";
 import { CardModel, getData, getDataSearch } from "./Model/model_index.js";
-import { CardAction } from './View/view_constants.js';
+import { HeaderAction } from './View/view_constants.js';
 
 
 
@@ -20,12 +20,24 @@ export class CardController {
         })
     }
 
-    onHeaderAction = (action, payload) => {
+    onHeaderAction = (action, payload = undefined) => {
         switch (action) {
-            case CardAction.input:
+            case HeaderAction.search:
                 this.searchCard(payload);
                 break;
+            case HeaderAction.reboot:
+                this.initializeReboot(payload);
+                break;
         }
+    }
+
+    initializeReboot(newURL) {
+        getDataSearch(newURL).then(data => {
+            this.model.setCards(data);
+            console.log(data);
+            this.view.renderCards(this.model.getCards());
+            console.log(this.model.getCards(data));
+        })
     }
 
     initialize() {

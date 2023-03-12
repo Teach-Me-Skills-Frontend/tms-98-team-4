@@ -1,6 +1,6 @@
 //написать функцию прорисовки кнопки, общий вид для всех кнопок в приложении//
 //написать функцию прорисовки модального окна, общий вид для всех модалок в приложении//
-import { AddBtnNames, boardnames, datasetNames } from './view_constants.js';
+import { AddBtnNames, boardnames, datasetNames, HeaderAction } from './view_constants.js';
 
 export function createBtn(title, buttonProps) {
     const button = document.createElement('button');
@@ -37,7 +37,7 @@ export function createBoard() {
     //временно событие, добавлю через метод в class header
 
     boardBtn.setAttribute('name', 'boardPick');
-    boardBtn.setAttribute('data-action', 'showBoards');
+    boardBtn.setAttribute('data-action', HeaderAction.openBoardsBtn);
 
     const boardDrop = document.createElement('div');
     boardDrop.classList.add('dropdown-content');

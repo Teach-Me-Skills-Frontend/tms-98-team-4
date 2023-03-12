@@ -20,7 +20,7 @@
 }
 
 .btn-lg{
-  min-width: 100px;
+  min-width: 160px;
 }
 
 .flex-1{
@@ -52,6 +52,7 @@
   .dropdown {
     position: relative;
     display: inline-block;
+    min-width: 160px;
   }
   
   /* Выпадающее содержимое (скрыто по умолчанию) */
@@ -76,7 +77,15 @@
   .dropdown-content a:hover {background-color: #ddd}
     
   .show {
-    display:block;    
+    display:block;
+    animation: drop 0.3s ease-in-out;    
   }
 
- 
+  @keyframes drop {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

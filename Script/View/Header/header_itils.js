@@ -1,4 +1,5 @@
 import { createSearchInput, createBtn, createBoard } from '../view_utils.js';
+import { HeaderAction } from '../view_constants.js';
 import { AddBtnNames } from '../view_constants.js';
 
 export function createHeader() {
@@ -7,6 +8,7 @@ export function createHeader() {
 
     const btnLabel = createBtn(AddBtnNames.label);
     btnLabel.classList.add('btn-warning');
+    btnLabel.setAttribute('data-action', `${HeaderAction.reboot}`);
 
 
     const searchForm = document.createElement('form');

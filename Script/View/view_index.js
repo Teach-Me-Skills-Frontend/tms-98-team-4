@@ -2,6 +2,7 @@
 
 import { CardList } from "./CardList/CardList.js";
 import { Header } from "./Header/header.js";
+import { HeaderAction } from './view_constants.js';
 // import { header } from "./Header/header.js";
 
 
@@ -17,8 +18,8 @@ function createPinterestAppCard(header, cardList) { //пробросить heade
 export class CardView {
 	constructor({ cards, containerId = 'root', onHeaderAction }) {
 		this.CardList = new CardList(cards);
-		this.header = new Header({ onHeaderSearch: (searchText) => onHeaderAction('input', searchText) });
-
+		this.header = new Header(
+			{ onHeaderSearch: (searchText) => onHeaderAction(HeaderAction.search, searchText), onHeaderReboot: (newUrl) => onHeaderAction(HeaderAction.reboot, newUrl) });
 		const rootContainer = document.getElementById(containerId);
 		const appCard = createPinterestAppCard(this.header.cardContainer, this.CardList.cardContainer); //пробросить header в appCard, когда будет готов
 		rootContainer.append(appCard);

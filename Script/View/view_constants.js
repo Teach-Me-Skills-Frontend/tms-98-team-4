@@ -17,6 +17,14 @@ export const CardAction = {
 	Undo: 'undo'
 }
 
+export const HeaderAction = {
+	search: 'input',
+	openBoardsBtn: 'showBoards',
+	reboot: 'reboot',
+	Complete: 'complete',
+	Undo: 'undo'
+}
+
 export const datasetNames = {
 	openBoard: 'openBoard',
 	// Delete: 'delete',
