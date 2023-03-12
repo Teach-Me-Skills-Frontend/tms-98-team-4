@@ -2,8 +2,8 @@ export const CardAction = {
 	addPin: "addPin",
 	addComplain: "addComplain",
 	cancelRestriction: "cancelRestriction",
-	openFull: 'openFull',
-	openOptions: 'openOptions'
+	OpenFull: 'openFull',
+	OpenOptions: 'openOptions'
 };
 const CardStatus = {
 	AddedPin: "added-Pin",

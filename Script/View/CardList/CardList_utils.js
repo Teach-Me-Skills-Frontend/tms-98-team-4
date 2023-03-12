@@ -16,6 +16,7 @@ export function createCard(cardParams, CardAction) {
     const mainImg = document.createElement('img');
     mainImg.classList.add('card-img-top', 'img-fluid', 'flex-1');
     mainImg.setAttribute('src', urls.regular);
+    mainImg.setAttribute('data-card-id', cardParams.id);
 
     const mainImgContainer = document.createElement('div');
     mainImgContainer.classList.add('img-container');
