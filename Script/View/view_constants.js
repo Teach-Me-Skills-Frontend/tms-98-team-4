@@ -6,28 +6,12 @@ export const AddBtnNames = {
 	pickBoard: 'Boards'
 };
 
-export const boardnames = ['Board 1', 'Board 2', 'Board 3'];
+export const boardNames = ['Board 1', 'Board 2', 'Board 3'];
 
 export const labelName = 'Pinterest';
 
-export const CardAction = {
-	input: 'input',
-	Delete: 'delete',
-	Complete: 'complete',
-	Undo: 'undo'
-}
-
 export const HeaderAction = {
-	search: 'input',
-	openBoardsBtn: 'showBoards',
-	reboot: 'reboot',
-	Complete: 'complete',
-	Undo: 'undo'
-}
-
-export const datasetNames = {
-	openBoard: 'openBoard',
-	// Delete: 'delete',
-	// Complete: 'complete',
-	// Undo: 'undo'
-}
+	search: 'search',
+	reload: "reload",
+	openDropBoard: "openDropBoard",
+};

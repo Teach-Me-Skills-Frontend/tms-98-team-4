@@ -1,35 +1,28 @@
-//пишем класс прорисовки всего приложения (Search, Board, Cards)//
-
 import { CardList } from "./CardList/CardList.js";
 import { Header } from "./Header/header.js";
-import { HeaderAction } from './view_constants.js';
-// import { header } from "./Header/header.js";
 
-
-function createPinterestAppCard(header, cardList) { //пробросить header в функцию, когда будет готов
+function createPinterestAppCard(header, cardList) {
 	const appCard = document.createElement('div');
 	appCard.classList.add('app-card');
 
-	appCard.append(header, cardList); //пробросить header в append, когда будет готов
+	appCard.append(header, cardList);
 	return appCard;
 }
 
-
-export class CardView {
-	constructor({ cards, containerId = 'root', onHeaderAction, onCardAction }) {
-		this.CardList = new CardList(cards, onCardAction);
-		this.header = new Header(
-			{ onHeaderSearch: (searchText) => onHeaderAction(HeaderAction.search, searchText), onHeaderReboot: (newUrl) => onHeaderAction(HeaderAction.reboot, newUrl) });
-		const rootContainer = document.getElementById(containerId);
-		const appCard = createPinterestAppCard(this.header.cardContainer, this.CardList.cardContainer); //пробросить header в appCard, когда будет готов
-		rootContainer.append(appCard);
+export class View {
+	constructor({ containerId, onHeaderAction, onCardAction }) {
+		this.cardList = new CardList(onCardAction);
+		this.header = new Header(onHeaderAction);
+		this.rootContainer = document.getElementById(containerId);
+		this.appCard = createPinterestAppCard(this.header.cardContainer, this.cardList.cardContainer);
+		this.rootContainer.append(this.appCard);
 	}
 
 	renderCards = (cards) => {
-		this.CardList.renderCards(cards);
+		this.cardList.renderCards(cards);
 	}
 
 	openPhoto = (src) => {
-		this.CardList.openPhoto(src);
+		this.cardList.openPhoto(src);
 	}
 }

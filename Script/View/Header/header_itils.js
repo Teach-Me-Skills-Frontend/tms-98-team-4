@@ -8,11 +8,12 @@ export function createHeader() {
 
     const btnLabel = createBtn(AddBtnNames.label);
     btnLabel.classList.add('btn-warning');
-    btnLabel.setAttribute('data-action', `${HeaderAction.reboot}`);
+    btnLabel.setAttribute('data-header-action', `${HeaderAction.reload}`);
 
 
     const searchForm = document.createElement('form');
     searchForm.classList.add('d-flex', 'w-50');
+    searchForm.setAttribute('data-header-action', `${HeaderAction.search}`);
     const searchInput = createSearchInput();
 
     searchForm.append(searchInput);

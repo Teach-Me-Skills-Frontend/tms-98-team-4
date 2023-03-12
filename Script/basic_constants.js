@@ -5,6 +5,7 @@ export const CardAction = {
 	OpenFull: 'openFull',
 	OpenOptions: 'openOptions'
 };
+
 const CardStatus = {
 	AddedPin: "added-Pin",
 	restricted: "restricted",

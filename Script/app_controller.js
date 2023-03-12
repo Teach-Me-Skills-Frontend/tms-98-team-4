@@ -1,53 +1,50 @@
-import { CardList } from "./View/CardList/CardList.js";
-import { CardView } from "./View/view_index.js";
-import { CardModel, getData, getDataSearch } from "./Model/model_index.js";
+import { View } from "./View/view_index.js";
+import { CardModel, getData, getNewData } from "./Model/model_index.js";
 import { HeaderAction } from './View/view_constants.js';
 import { CardAction } from './basic_constants.js';
 
 export class CardController {
     constructor(containerId) {
         this.model = new CardModel();
-        this.view = new CardView({ containerId, onHeaderAction: this.onHeaderAction, onCardAction: this.onCardAction });
+        this.view = new View({ containerId, onHeaderAction: this.onHeaderAction, onCardAction: this.onCardAction });
     }
 
-    searchCard(searchURL) {
-        getDataSearch(searchURL).then(data => {
-            this.model.setCards(data.results);
-            console.log(data);
-            this.view.renderCards(this.model.getCards());
-            console.log(this.model.getCards(data));
-        })
+    getSearch(searchURL) {
+        getNewData(searchURL)
+            .then(
+                data => {
+                    this.model.setCards(data.results);
+                    this.view.renderCards(this.model.getCards());
+                })
+    }
+
+    getReboot(url) {
+        getNewData(url)
+            .then(
+                data => {
+                    this.model.setCards(data);
+                    this.view.renderCards(this.model.getCards());
+                })
     }
 
     onHeaderAction = (action, payload = undefined) => {
         switch (action) {
             case HeaderAction.search:
-                this.searchCard(payload);
+                this.getSearch(payload);
                 break;
-            case HeaderAction.reboot:
-                this.Reboot(payload);
+            case HeaderAction.reload:
+                this.getReboot(payload);
                 break;
         }
-    }
-
-    Reboot(newURL) {
-        getDataSearch(newURL).then(data => {
-            this.model.setCards(data);
-            console.log(data);
-            this.view.renderCards(this.model.getCards());
-            console.log(this.model.getCards(data));
-        })
     }
 
     openPhoto = (src) => {
         this.view.openPhoto(src);
     }
 
-    onCardAction = (action, payload) => {    
-        
-        console.log('qqq')
+    onCardAction = (action, payload) => {
         switch (action) {
-            case CardAction.OpenFull: 
+            case CardAction.OpenFull:
                 this.openPhoto(payload);
         }
     }
@@ -57,9 +54,7 @@ export class CardController {
             .then(
                 data => {
                     this.model.setCards(data);
-                    console.log(data);
                     this.view.renderCards(this.model.getCards());
-                    console.log(this.model.getCards(data));
                 })
     }
 }

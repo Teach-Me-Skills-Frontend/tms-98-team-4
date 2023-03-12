@@ -30,20 +30,33 @@
   height: 100%;
 }
 
+
 .card-button{
   width: 30px;
   height: 30px;
   position: relative;
   bottom: 40px;
-  left: calc(100% - 40px);
+  left: calc(100% - 60px);
   border-radius: 50%;
   border: none;
   background: rgba(255, 239, 183, 0.84);
+  opacity: 0;
+  transition: 0.5s;
 }
 
+.card-button:hover{
+  background: rgba(250, 197, 6, 0.979);
+  border-radius: 30%;
+  width: 45px;  
+}
+
+.img-container:hover .card-button{
+  opacity: 1;  
+}
 
 .img-container{
   flex:1;
+  cursor: pointer;
 }
 
 
