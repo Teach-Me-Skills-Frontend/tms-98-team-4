@@ -1,15 +1,17 @@
 import { CardList } from "./View/CardList/CardList.js";
 import { CardView } from "./View/view_index.js";
 import { CardModel, getData, getDataSearch } from "./Model/model_index.js";
-import { CardAction } from './View/view_constants.js';
-import { openPhoto } from './View/view_utils.js';
-
+import { CardAction } from './basic_constants.js';
 
 
 export class CardController {
-    constructor(containerId) {
+    constructor(containerId, ) {
         this.model = new CardModel();
-        this.view = new CardView({ containerId, onHeaderAction: this.onHeaderAction });
+        this.view = new CardView({ 
+            containerId,
+            onHeaderAction: this.onHeaderAction,
+            onCardAction: this.onCardAction
+        });
     }
 
     searchCard(searchURL) {
@@ -29,6 +31,17 @@ export class CardController {
         }
     }
 
+    openPhoto = (src) => {
+        this.view.openPhoto(src);
+    }
+
+    onCardAction = (action, payload) => {     
+        switch (action) {
+            case CardAction.OpenFull: 
+                this.openPhoto(payload);
+        }
+    }
+
     initialize() {
         getData()
             .then(
@@ -37,7 +50,6 @@ export class CardController {
                     console.log(data);
                     this.view.renderCards(this.model.getCards());
                     console.log(this.model.getCards(data));
-                    openPhoto();
                 })
     }
 }
