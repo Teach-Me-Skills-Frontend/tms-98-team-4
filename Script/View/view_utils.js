@@ -26,14 +26,16 @@ export function createBoard() {
     const boardContainer = document.createElement('div');
     boardContainer.classList.add('dropdown');
 
+
     const boardBtn = document.createElement('button');
     boardBtn.classList.add('btn', 'btn-outline-success', 'btn-lg');
     boardBtn.setAttribute('data-header-action', `${HeaderAction.openDropBoard}`);
     boardBtn.textContent = `${AddBtnNames.pickBoard}`;
+    boardBtn.setAttribute('id', 'dropDownBtn');
 
     const boardDrop = document.createElement('div');
     boardDrop.classList.add('dropdown-content');
-    boardDrop.setAttribute('id', 'myDropdown');
+    boardDrop.setAttribute('id', 'dropDownList');
 
     for (const name of boardNames) {
         const boardItem = document.createElement('a');

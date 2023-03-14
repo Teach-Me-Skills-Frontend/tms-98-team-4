@@ -37,8 +37,16 @@ export class Header {
         } = event;
         switch (headerAction) {
             case HeaderAction.openDropBoard:
-                const boards = event.target.closest('.dropdown');
-                boards.children[1].classList.toggle('show');
+                const boardsList = document.getElementById('dropDownList');
+                boardsList.classList.toggle('show');
+                //close dropdown by any other click on display
+                document.addEventListener('click', (event) => {
+                    const boardsBtn = document.getElementById('dropDownBtn');
+                    const withinBounderieas = event.composedPath().includes(boardsBtn);
+                    if (!withinBounderieas && boardsList.classList.contains('show')) {
+                        boardsList.classList.remove("show")
+                    }
+                })
                 break;
             case HeaderAction.reload:
                 let rebootUrl = `https://api.unsplash.com/photos?page=
