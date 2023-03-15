@@ -2,11 +2,14 @@ import { View } from "./View/view_index.js";
 import { CardModel, getData, getNewData } from "./Model/model_index.js";
 import { HeaderAction } from './View/view_constants.js';
 import { CardAction } from './basic_constants.js';
+import { ModalForm } from './View/ModalView/ModalForm.js';
+
 
 export class CardController {
     constructor(containerId) {
         this.model = new CardModel();
         this.view = new View({ containerId, onHeaderAction: this.onHeaderAction, onCardAction: this.onCardAction });
+        this.modalForm = new ModalForm();
     }
 
     getSearch(searchURL) {
@@ -42,10 +45,18 @@ export class CardController {
         this.view.openPhoto(src);
     }
 
+    openModal = (id) => {
+        this.modalForm.openModal(id);
+    }
+
     onCardAction = (action, payload) => {
         switch (action) {
             case CardAction.OpenFull:
                 this.openPhoto(payload);
+                break;
+            case CardAction.OpenOptions:
+                this.openModal(payload);
+                break;
         }
     }
 

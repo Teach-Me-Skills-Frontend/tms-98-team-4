@@ -1,7 +1,10 @@
-function createCardButton() {
+import { createCardModal } from '../ModalView/ModalView_utils.js'
+
+function createCardButton(id) {
    const cardButton = document.createElement('button');
    cardButton.classList.add('card-button');
    cardButton.setAttribute('data-card-action', 'openOptions');
+   cardButton.setAttribute('id', id);
 
    return cardButton;
 }
@@ -20,7 +23,7 @@ export function createCard(cardParams, CardAction) {
 
    const mainImgContainer = document.createElement('div');
    mainImgContainer.classList.add('img-container');
-   mainImgContainer.append(mainImg, createCardButton());
+   mainImgContainer.append(mainImg, createCardButton(cardParams.id));
 
    const cardBody = document.createElement('div');
    cardBody.classList.add('card-body', 'flex-0');

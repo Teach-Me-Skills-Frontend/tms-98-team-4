@@ -10,8 +10,10 @@ export class CardList {
     );
 
     this.cardContainer.addEventListener('click', ({ target }) => {
-      if (Object.values(CardAction).includes(target.dataset.cardAction)) {
+      if (Object.values(CardAction).includes(target.dataset.cardAction) && target.hasAttribute('src')) {
         onCardAction(target.dataset.cardAction, target.src);
+      } else if (Object.values(CardAction).includes(target.dataset.cardAction)) {
+        onCardAction(target.dataset.cardAction, target.id);
       }
     });
   }
