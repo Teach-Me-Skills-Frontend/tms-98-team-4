@@ -1,7 +1,0 @@
-const ModalAction = {
-	addPin: "addPin",
-};
-
-const ModalStatus = {
-	namePin: "",
-};

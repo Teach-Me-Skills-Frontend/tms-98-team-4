@@ -6,9 +6,8 @@ export class CardList {
     this.cardContainer = document.createElement('div');
     this.cardContainer.setAttribute('id', 'card-container');
     this.cardContainer.classList.add(
-      'container-sm','d-flex','flex-wrap','justify-content-evenly','flex-row','g-2'
+      'container-sm', 'd-flex', 'flex-wrap', 'justify-content-evenly', 'flex-row', 'g-2'
     );
-
     this.cardContainer.addEventListener('click', ({ target }) => {
       if (Object.values(CardAction).includes(target.dataset.cardAction) && target.hasAttribute('src')) {
         onCardAction(target.dataset.cardAction, target.src);

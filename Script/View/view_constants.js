@@ -15,3 +15,15 @@ export const HeaderAction = {
 	reload: "reload",
 	openDropBoard: "openDropBoard",
 };
+
+export const ModalAction = {
+	cancel: 'cancel',
+	send: "send",
+	addboard: 'add to a board',
+	complain: "complain",
+};
+
+export const ModalsID = {
+	complainModal: 'complain',
+	boardsModal: 'boardsModal',
+};

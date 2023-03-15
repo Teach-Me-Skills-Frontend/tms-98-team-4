@@ -11,3 +11,4 @@ const CardStatus = {
 	restricted: "restricted",
 	available: "available",
 };
+

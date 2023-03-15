@@ -5,6 +5,13 @@
    min-width: 150px;
    margin: 1vw;
    background-color: rgba(185, 177, 177, 0.096);
+   position: relative;
+}
+
+#complain{
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 #root {
@@ -165,6 +172,14 @@ header {
    min-width: 160px;
 }
 
+.bg-complainModal {
+  background-color: #ddd;
+}
+
+.check-gap{
+  margin-bottom: 0.5vw;
+}
+
 /* Выпадающее содержимое (скрыто по умолчанию) */
 .dropdown-content {
    display: none;
@@ -212,4 +227,8 @@ header {
   height: 45px;
   display: block;
   overflow: hidden;
+}
+
+.shadow{
+  position: relative;
 }

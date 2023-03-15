@@ -2,14 +2,14 @@ import { View } from "./View/view_index.js";
 import { CardModel, getData, getNewData } from "./Model/model_index.js";
 import { HeaderAction } from './View/view_constants.js';
 import { CardAction } from './basic_constants.js';
+import { ModalAction } from './View/view_constants.js';
 import { ModalForm } from './View/ModalView/ModalForm.js';
-
 
 export class CardController {
     constructor(containerId) {
         this.model = new CardModel();
         this.view = new View({ containerId, onHeaderAction: this.onHeaderAction, onCardAction: this.onCardAction });
-        this.modalForm = new ModalForm();
+        this.modalForm = new ModalForm(this.onModalAction);
     }
 
     getSearch(searchURL) {
@@ -41,6 +41,24 @@ export class CardController {
         }
     }
 
+    onModalAction = (action, payload = undefined) => {
+        switch (action) {
+            case ModalAction.complain:
+                this.openComplainModal(payload);
+                break;
+            case ModalAction.cancel:
+                this.closeComplainModal(payload);
+                break;
+            case ModalAction.send:
+                this.sendComplain(payload);
+                break;
+        }
+    }
+    openComplainModal = (id) => {
+        this.modalForm.openComplainModal(id);
+    }
+
+
     openPhoto = (src) => {
         this.view.openPhoto(src);
     }
@@ -49,13 +67,27 @@ export class CardController {
         this.modalForm.openModal(id);
     }
 
-    onCardAction = (action, payload) => {
+    onCardAction = (id) => {
+        this.view.openComplainModal();
+    }
+
+    closeComplainModal = () => {
+        this.modalForm.closeComplainModal();
+    }
+
+    sendComplain = (id) => {
+        this.modalForm.sendComplain(id);
+    }
+
+    onCardAction = (action, payload = undefined) => {
         switch (action) {
             case CardAction.OpenFull:
                 this.openPhoto(payload);
                 break;
             case CardAction.OpenOptions:
                 this.openModal(payload);
+                break;
+            case CardAction.openComplainModal:
                 break;
         }
     }
@@ -69,3 +101,4 @@ export class CardController {
                 })
     }
 }
+

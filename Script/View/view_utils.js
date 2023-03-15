@@ -1,4 +1,5 @@
 import { AddBtnNames, boardNames, HeaderAction } from './view_constants.js';
+import { causesComplains } from '../View/ModalView/ModalAddBan/ModalAddBan_constants.js';
 
 export function createBtn(title, buttonProps) {
     const button = document.createElement('button');
@@ -48,8 +49,29 @@ export function createBoard() {
     return boardContainer;
 }
 
+export function createCheckBoxesСomplain(causes) {
+    const checkBoxContainerBasic = document.createElement('div');
+    for (const key in causesComplains) {
+        const checkBoxContainer = document.createElement('div');
+        checkBoxContainer.classList.add('form-check', 'check-gap');
+        checkBoxContainer.setAttribute('id', 'modalComplainCheckBox');
 
+        const checkBoxinput = document.createElement('input');
+        checkBoxinput.classList.add('form-check-input');
+        checkBoxinput.setAttribute('type', 'checkbox');
+        checkBoxinput.classList.add('form-check-input');
+        checkBoxinput.setAttribute('id', 'flexCheckDefault');
 
+        const checkBoxLabel = document.createElement('label');
+        checkBoxLabel.classList.add('form-check-label');
+        checkBoxLabel.setAttribute('id', 'flexCheckDefault');
 
+        checkBoxLabel.textContent = causesComplains[key];
+        checkBoxContainer.append(checkBoxinput, checkBoxLabel)
+
+        checkBoxContainerBasic.append(checkBoxContainer);
+    }
+    return checkBoxContainerBasic;
+}
 
 

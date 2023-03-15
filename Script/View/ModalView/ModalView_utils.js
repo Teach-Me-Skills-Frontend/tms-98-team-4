@@ -1,16 +1,19 @@
-export function createModalButton (dataset, datavalue, textContent) {
-    const button = document.createElement('button');
-    button.classList.add('btn', 'btn-warning', 'button-modal');
-    button.setAttribute(`data-${dataset}`, datavalue);
-    button.textContent = textContent;
-    return button;
-}
+import { ModalAction } from '../view_constants.js';
+import { createBtn } from '../view_utils.js';
 
-export function createCardModal () {
+export function createCardModal() {
     const cardModal = document.createElement('div');
     cardModal.classList.add('card-modal');
-    cardModal.setAttribute('id', 'card-modal');
-    cardModal.append(createModalButton('data-add-to-board', 'addToBoard', 'Add to board'));
-    cardModal.append(createModalButton('data-send-complain', 'sendComplain', 'Complain'));
+
+    const btnBaseModalAddBoard = createBtn(ModalAction.addboard);
+    btnBaseModalAddBoard.classList.add('btn-warning', 'button-modal');
+    btnBaseModalAddBoard.setAttribute('data-modal-action', `${ModalAction.addboard}`);
+
+
+    const btnBaseModalComplain = createBtn(ModalAction.complain);
+    btnBaseModalComplain.classList.add('btn-warning', 'button-modal');
+    btnBaseModalComplain.setAttribute('data-modal-action', `${ModalAction.complain}`);
+
+    cardModal.append(btnBaseModalAddBoard, btnBaseModalComplain);
     return cardModal;
 }
