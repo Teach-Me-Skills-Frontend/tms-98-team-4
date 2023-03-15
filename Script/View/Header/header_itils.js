@@ -1,26 +1,31 @@
-import { createSearchInput, createBtn, createBoard } from '../view_utils.js';
-import { HeaderAction } from '../view_constants.js';
-import { AddBtnNames } from '../view_constants.js';
+import { createSearchInput, createBtn, createBoard } from "../view_utils.js";
+import { HeaderAction } from "../view_constants.js";
+import { AddBtnNames } from "../view_constants.js";
 
 export function createHeader() {
-    const header = document.createElement('header');
-    header.classList.add('container-sm', 'd-flex', 'justify-content-between', 'header_spacing');
+  const header = document.createElement("header");
+  header.classList.add(
+    "container-sm",
+    "d-flex",
+    "justify-content-evenly",
+    "header_spacing",
+    "mb-4"
+  );
 
-    const btnLabel = createBtn(AddBtnNames.label);
-    btnLabel.classList.add('btn-warning');
-    btnLabel.setAttribute('data-header-action', `${HeaderAction.reload}`);
+  const btnLabel = createBtn(AddBtnNames.label);
+  btnLabel.classList.add("btn-warning");
+  btnLabel.setAttribute("data-header-action", `${HeaderAction.reload}`);
 
+  const searchForm = document.createElement("form");
+  searchForm.classList.add("d-flex", "w-50", "form");
+  searchForm.setAttribute("data-header-action", `${HeaderAction.search}`);
+  const searchInput = createSearchInput();
 
-    const searchForm = document.createElement('form');
-    searchForm.classList.add('d-flex', 'w-50');
-    searchForm.setAttribute('data-header-action', `${HeaderAction.search}`);
-    const searchInput = createSearchInput();
+  searchForm.append(searchInput);
 
-    searchForm.append(searchInput);
+  const boardDropContainer = createBoard();
 
-    const boardDropContainer = createBoard();
+  header.append(btnLabel, searchForm, boardDropContainer);
 
-    header.append(btnLabel, searchForm, boardDropContainer);
-
-    return header;
+  return header;
 }
