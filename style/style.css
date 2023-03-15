@@ -59,6 +59,26 @@
   cursor: pointer;
 }
 
+.card-modal {
+  background-color: rgba(0, 0, 0, 0.45);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  animation: zoom 0.3s ease-in-out;
+}
+
+.button-modal {
+  display: block;
+  width: 82%;
+}
+
 .modal-div {
    width: 100%;
    height: 101%;
@@ -71,6 +91,11 @@
    animation: zoom 0.3s ease-in-out;
 }
 
+.deleting {
+  transform: scale(0);
+  transition-duration: 1s;
+}
+
 @keyframes zoom {
    from {
       transform: scale(0);
@@ -78,6 +103,15 @@
    to {
       transform: scale(1);
    }
+}
+
+@keyframes reduce {
+  from {
+     transform: scale(1);
+  }
+  to {
+     transform: scale(0);
+  }
 }
 
 .modal-div img {
