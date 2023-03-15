@@ -1,0 +1,14 @@
+@media (max-width: 768px) {
+  .d-flex {
+    justify-content: center !important;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .form {
+    order: 3;
+    width: 70% !important;
+  }
+  .mb-4 {
+    margin-top: 1.5rem;
+  }
+}
