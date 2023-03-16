@@ -36,18 +36,22 @@
   height: 30px;
   position: relative;
   bottom: 40px;
-  left: calc(100% - 60px);
+  left: calc(100% - 40px);
   border-radius: 50%;
   border: none;
-  background: rgba(255, 239, 183, 0.84);
+  background: white;
   opacity: 0;
   transition: 0.5s;
 }
 
 .card-button:hover{
-  background: rgba(250, 197, 6, 0.979);
+  background:#bdae82 ;
+  opacity: 1;
   border-radius: 30%;
-  width: 45px;
+
+}
+.btnImg{
+  pointer-events: none;
 }
 
 .img-container:hover .card-button {
