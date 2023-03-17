@@ -51,6 +51,7 @@ export function createBoard() {
 
 export function createCheckBoxesСomplain(causes) {
     const checkBoxContainerBasic = document.createElement('div');
+    checkBoxContainerBasic.setAttribute('id', 'check-boxes')
     for (const key in causesComplains) {
         const checkBoxContainer = document.createElement('div');
         checkBoxContainer.classList.add('form-check', 'check-gap');
@@ -59,12 +60,11 @@ export function createCheckBoxesСomplain(causes) {
         const checkBoxinput = document.createElement('input');
         checkBoxinput.classList.add('form-check-input');
         checkBoxinput.setAttribute('type', 'checkbox');
-        checkBoxinput.classList.add('form-check-input');
-        checkBoxinput.setAttribute('id', 'flexCheckDefault');
+        // checkBoxinput.setAttribute('id', 'flexCheckDefault');
 
         const checkBoxLabel = document.createElement('label');
         checkBoxLabel.classList.add('form-check-label');
-        checkBoxLabel.setAttribute('id', 'flexCheckDefault');
+        // checkBoxLabel.setAttribute('id', 'flexCheckDefault');
 
         checkBoxLabel.textContent = causesComplains[key];
         checkBoxContainer.append(checkBoxinput, checkBoxLabel)

@@ -69,6 +69,7 @@
 .img-container {
   flex: 1;
   cursor: pointer;
+  min-height: 300px;    
 }
 
 .card-modal {

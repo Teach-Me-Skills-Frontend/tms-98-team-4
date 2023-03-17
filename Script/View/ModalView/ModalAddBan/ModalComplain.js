@@ -9,7 +9,6 @@ export class ComplainModal {
 
         this.modalComplainContainer.addEventListener('click', ({ target }) => {
             if (Object.values(ModalAction).includes(target.dataset.modalAction)) {
-                console.log(target.name);
                 onModalAction(target.dataset.modalAction, target.name);
             }
         })

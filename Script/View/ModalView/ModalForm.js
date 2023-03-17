@@ -9,7 +9,6 @@ export class ModalForm {
         this.cardModal = createCardModal();
         this.cardModal.addEventListener('click', ({ target }) => {
             if (Object.values(ModalAction).includes(target.dataset.modalAction)) {
-                console.log(target.name);
                 onModalAction(target.dataset.modalAction, target.name);
             }
         })
@@ -18,13 +17,12 @@ export class ModalForm {
 
     openModal = (cardId) => {
         const card = document.getElementById(cardId);
-        console.log(card);
         this.cardModal.setAttribute('id', `${cardId}`);
-        const children = this.cardModal.children;
-        children[0].setAttribute('name', `${cardId}`);
-        children[1].setAttribute('name', `${cardId}`);
+        const children = this.cardModal.childNodes;
+        for (let i = 0; i < children.length; i += 1) {
+            children[i].setAttribute('name', `${cardId}`)
+        }
         card.append(this.cardModal);
-        this.closeModal()
     }
 
     closeModal = () => {
@@ -33,25 +31,30 @@ export class ModalForm {
         });
     }
 
+    clearCheckBoxes = () => {
+        [...document.getElementsByClassName('form-check-input')].forEach(item => { item.checked = false })
+    }
+
     openComplainModal = (cardId) => {
         this.cardModal.remove();
         const card = document.getElementById(cardId);
         card.append(this.modalComplain.modalComplainContainer);
         const btns = document.getElementById('complainBtns');
-        const children = btns.children;
-        children[0].setAttribute('name', `${cardId}`);
-        children[1].setAttribute('name', `${cardId}`);
+        const children = btns.childNodes;
+        for (let i = 0; i < children.length; i += 1) {
+            children[i].setAttribute('name', `${cardId}`)
+        }
     }
     closeComplainModal = () => {
-        console.log('hello close')
+        this.clearCheckBoxes();
         this.modalComplain.modalComplainContainer.remove();
     }
 
     sendComplain = (cardId) => {
-        console.log(cardId);
         const card = document.getElementById(`${cardId}`);
-        console.log(card);
-        card.remove();
+        if ([...document.getElementsByClassName('form-check-input')].find(item => { return item.checked })) {
+            this.clearCheckBoxes();
+            card.remove();
+        } else { alert('Choose a cause of your complaint') }
     }
-
 }
