@@ -38,7 +38,7 @@ export const BoardsAction = {
 	deleteBoard: 'deleteBoard',
 	cleanBoardsCards: 'clean Boards cards',
 	returnToTheMainPage: 'Return to main',
-	cleanBoard: 'Clean a bord'
+	cleanBoard: 'Clean a bord',
 };
 
 export const ModalsID = {

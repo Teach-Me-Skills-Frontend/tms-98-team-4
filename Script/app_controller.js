@@ -128,7 +128,6 @@ export class CardController {
     }
 
     openModal = (id) => {
-        console.log('open base modal')
         this.modalForm.openModal(id);
     }
 
@@ -158,13 +157,12 @@ export class CardController {
 
     renderCountCardItem = (name) => {
         const boardName = document.getElementById(name);
-        boardName.textContent = `${name} [ ${(this.model.cardStorage.filter(element => element.nameBoard === name)).length} ]`
+        boardName.textContent = `${name} [ ${(this.model.cardStorage.filter(element => element.nameBoard === name)).length} ]`;
     }
 
     renderCountCardstart = (name) => {
-        for (let key of name) {
+        for (const key of name) {
             const boardName = document.getElementById(key);
-            console.log(boardName);
             boardName.textContent = `${key} [ ${(this.model.cardStorage.filter(element => element.nameBoard === key)).length} ]`
         }
     }

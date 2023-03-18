@@ -73,7 +73,6 @@ export class ModalForm {
     }
 
     closeAddModal = () => {
-        console.log('hello close');
         this.boardModal.modalBoardContainer.remove();
     }
 }
