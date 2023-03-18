@@ -7,17 +7,18 @@ export function createComplainModal() {
 
     const modalDescription = document.createElement('p');
     modalDescription.textContent = 'Describe your concern';
-    modalDescription.classList.add('d-flex', 'justify-content-center', 'text-center');
+    modalDescription.classList.add('d-flex', 'justify-content-center', 'text-center', 'text-align-center');
 
     const checkBoxes = createCheckBoxesСomplain();
 
     const containerComplainBtns = document.createElement('div', 'd');
-    containerComplainBtns.classList.add('container-sm', 'd-grid', 'grid-column', 'justify-content-center','gap-2');
+    containerComplainBtns.classList.add('container-sm', 'd-grid', 'grid-column', 'justify-content-center', 'gap-2');
     containerComplainBtns.setAttribute('id', 'complainBtns')
 
     const btnCancel = createBtn(ModalAction.cancel);
     btnCancel.classList.add('btn-outline-danger');
-    btnCancel.setAttribute('data-modal-action', `${ModalAction.cancel}`);
+    btnCancel.setAttribute('data-modal-action', `${ModalAction.cancelComplain}`);
+    btnCancel.textContent = 'cancel';
 
     const btnSend = createBtn(ModalAction.send);
     btnSend.classList.add('btn-warning');

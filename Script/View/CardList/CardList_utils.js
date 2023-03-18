@@ -5,7 +5,7 @@ function createCardButton(id) {
    cardButton.classList.add('card-button');
    cardButton.setAttribute('data-card-action', 'openOptions');
    const cardImg = document.createElement('img');
-   cardImg.setAttribute('src', '././style/img/three_dots_icon_159804 (1).svg' );
+   cardImg.setAttribute('src', '././style/img/three_dots_icon_159804 (1).svg');
    cardImg.classList.add('btnImg');
    cardButton.append(cardImg);
    cardButton.setAttribute('id', id);

@@ -1,5 +1,5 @@
 import { createSearchInput, createBtn, createBoard } from '../view_utils.js';
-import { HeaderAction, AddBtnNames } from '../view_constants.js';
+import { HeaderAction, AddBtnNames, BoardsAction } from '../view_constants.js';
 
 export function createHeader() {
     const header = document.createElement('header');

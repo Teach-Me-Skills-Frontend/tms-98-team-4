@@ -3,7 +3,9 @@ export const AddBtnNames = {
 	cancelComplain: "cancel",
 	addPin: "add on Board",
 	label: "Pinterest",
-	pickBoard: 'Boards'
+	pickBoard: 'Boards',
+	deleteAllboards: 'Delete all boards',
+	cleanboard: 'clean '
 };
 
 export const boardNames = ['Board 1', 'Board 2', 'Board 3'];
@@ -17,10 +19,26 @@ export const HeaderAction = {
 };
 
 export const ModalAction = {
-	cancel: 'cancel',
+	cancelComplain: 'cancelComplain',
+	cancelAdd: 'cancelAdd',
 	send: "send",
 	addboard: 'add to a board',
 	complain: "complain",
+	addCardBoard: 'addCardBoard',
+};
+
+export const cardBoardAction = {
+	board1: 'Board 1',
+
+};
+
+
+export const BoardsAction = {
+	loadBoard: 'loadBoard',
+	deleteBoard: 'deleteBoard',
+	cleanBoardsCards: 'clean Boards cards',
+	returnToTheMainPage: 'Return to main',
+	cleanBoard: 'Clean a bord'
 };
 
 export const ModalsID = {

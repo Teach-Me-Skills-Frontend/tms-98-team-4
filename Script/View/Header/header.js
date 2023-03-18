@@ -1,12 +1,19 @@
 import { createHeader } from './header_itils.js';
 import { HeaderAction } from '../view_constants.js';
+import { BoardsAction } from '../view_constants.js';
 
 export class Header {
-    constructor(onHeaderAction) {
+    constructor(onHeaderAction, onBoardAction) {
         this.cardContainer = createHeader();
         this.onHeaderAction = onHeaderAction;
         this.cardContainer.addEventListener('submit', this.onFormSubmit);
         this.cardContainer.addEventListener('click', this.onHeaderClick);
+        this.cardContainer.addEventListener('click', ({ target }) => {
+            if (Object.values(BoardsAction).includes(target.dataset.boardAction)) {
+                console.log('hello')
+                onBoardAction(target.dataset.boardAction, target.name);
+            }
+        })
     }
 
     randomNumberReboot() {
