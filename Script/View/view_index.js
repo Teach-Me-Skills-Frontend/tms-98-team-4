@@ -1,6 +1,8 @@
 import { CardList } from "./CardList/CardList.js";
 import { Header } from "./Header/header.js";
 import { ComplainModal } from "./ModalView/ModalAddBan/ModalComplain.js";
+import { ModalAction } from "./view_constants.js";
+import { BoardModal } from "./ModalView/ModalAddCard/ModalAddCard.js";
 
 function createPinterestAppCard(header, cardList) {
 	const appCard = document.createElement('div');
@@ -15,6 +17,7 @@ export class View {
 		this.cardList = new CardList(onCardAction);
 		this.header = new Header(onHeaderAction);
 		this.complainModal = new ComplainModal();
+		this.BoardModal= new BoardModal();
 		this.rootContainer = document.getElementById(containerId);
 		this.appCard = createPinterestAppCard(this.header.cardContainer, this.cardList.cardContainer);
 		this.rootContainer.append(this.appCard);

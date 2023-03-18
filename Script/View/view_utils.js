@@ -59,7 +59,7 @@ export function createCheckBoxesСomplain(causes) {
         const checkBoxinput = document.createElement('input');
         checkBoxinput.classList.add('form-check-input');
         checkBoxinput.setAttribute('type', 'checkbox');
-        checkBoxinput.classList.add('form-check-input');
+
         checkBoxinput.setAttribute('id', 'flexCheckDefault');
 
         const checkBoxLabel = document.createElement('label');

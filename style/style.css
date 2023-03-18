@@ -181,6 +181,10 @@ header {
   background-color: #ddd;
 }
 
+.bg-boardModal{
+  background-color: #ddd;
+}
+
 .check-gap{
   margin-bottom: 0.5vw;
 }

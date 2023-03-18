@@ -21,6 +21,7 @@ export const ModalAction = {
 	send: "send",
 	addboard: 'add to a board',
 	complain: "complain",
+	cancelAdd: 'cancelAdd'
 };
 
 export const ModalsID = {

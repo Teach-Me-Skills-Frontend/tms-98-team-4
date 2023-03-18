@@ -52,10 +52,20 @@ export class CardController {
             case ModalAction.send:
                 this.sendComplain(payload);
                 break;
+            case ModalAction.addboard:
+                this.openBoardModal(payload);
+                break;
+            case ModalAction.cancelAdd:
+                this.closeAddModal(payload);
+                break;
         }
     }
     openComplainModal = (id) => {
         this.modalForm.openComplainModal(id);
+    }
+
+    openBoardModal = (id) => {
+        this.modalForm.openBoardModal(id)
     }
 
 
@@ -73,6 +83,10 @@ export class CardController {
 
     closeComplainModal = () => {
         this.modalForm.closeComplainModal();
+    }
+
+    closeAddModal = () =>{
+        this.modalForm.closeAddModal();
     }
 
     sendComplain = (id) => {

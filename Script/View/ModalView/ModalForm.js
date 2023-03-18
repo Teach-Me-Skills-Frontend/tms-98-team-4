@@ -1,11 +1,13 @@
 import { ModalAction } from '../view_constants.js';
 import { ComplainModal } from '../ModalView/ModalAddBan/ModalComplain.js';
 import { createCardModal } from '../ModalView/ModalView_utils.js';
+import { BoardModal } from './ModalAddCard/ModalAddCard.js';
 
 
 export class ModalForm {
     constructor(onModalAction) {
         this.modalComplain = new ComplainModal(onModalAction);
+        this.boardModal = new BoardModal(onModalAction)
         this.cardModal = createCardModal();
         this.cardModal.addEventListener('click', ({ target }) => {
             if (Object.values(ModalAction).includes(target.dataset.modalAction)) {
@@ -54,4 +56,18 @@ export class ModalForm {
         card.remove();
     }
 
+    openBoardModal = (cardId) => {
+        this.cardModal.remove();
+        const card = document.getElementById(cardId);
+        card.append(this.boardModal.modalBoardContainer);
+        // const btns = document.getElementById('complainBtns');
+        // const children = btns.children;
+        // children[0].setAttribute('name', `${cardId}`);
+        // children[1].setAttribute('name', `${cardId}`);
+    }
+
+    closeAddModal = () => {
+        console.log('hello close')
+        this.boardModal.modalBoardContainer.remove();
+    }
 }
