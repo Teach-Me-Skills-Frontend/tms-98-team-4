@@ -10,7 +10,6 @@ export class Header {
         this.cardContainer.addEventListener('click', this.onHeaderClick);
         this.cardContainer.addEventListener('click', ({ target }) => {
             if (Object.values(BoardsAction).includes(target.dataset.boardAction)) {
-                console.log('hello')
                 onBoardAction(target.dataset.boardAction, target.name);
             }
         })

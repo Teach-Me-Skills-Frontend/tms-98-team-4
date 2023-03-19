@@ -43,6 +43,7 @@ export function createBoard() {
         boardItem.setAttribute('data-board-action', BoardsAction.loadBoard);
         boardItem.setAttribute('name', `${name}`);
         boardItem.textContent = name;
+        boardItem.setAttribute('id', `${name}`);
 
         const cleanBoard = document.createElement('a');
         cleanBoard.textContent = `${AddBtnNames.cleanboard} ${name}`;

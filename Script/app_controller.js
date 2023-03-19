@@ -1,9 +1,7 @@
 import { View } from "./View/view_index.js";
 import { CardModel, getData, getNewData } from "./Model/model_index.js";
-import { HeaderAction } from './View/view_constants.js';
 import { CardAction } from './basic_constants.js';
-import { ModalAction } from './View/view_constants.js';
-import { BoardsAction } from './View/view_constants.js';
+import { ModalAction, boardNames, BoardsAction, HeaderAction } from './View/view_constants.js';
 import { ModalForm } from './View/ModalView/ModalForm.js';
 import { LocalStorageKey } from './Model/model_index.js';
 
@@ -12,6 +10,7 @@ export class CardController {
         this.model = new CardModel();
         this.view = new View({ containerId, onHeaderAction: this.onHeaderAction, onCardAction: this.onCardAction, onBoardAction: this.onBoardAction });
         this.modalForm = new ModalForm(this.onModalAction);
+        this.render = this.renderCountCardstart(boardNames);
     }
 
     getSearch(searchURL) {
@@ -72,7 +71,6 @@ export class CardController {
     }
 
     closeAddModal = () => {
-        console.log('hello app')
         this.modalForm.closeAddModal();
     }
 
@@ -106,10 +104,12 @@ export class CardController {
         } else {
             return;
         }
+        this.renderCountCardstart(boardNames);
     }
 
     cleanBoard = (name) => {
-        this.model.cleanBoard(name)
+        this.model.cleanBoard(name);
+        this.renderCountCardItem(name);
     }
 
     loadBoard = (name) => {
@@ -152,6 +152,20 @@ export class CardController {
         } else if
             ((this.model.getLocal().find(element => element.nameBoard === name && element.id === id)) === undefined) {
             this.model.saveLocal(name, id);
+        }
+        this.renderCountCardItem(name);
+    }
+
+    renderCountCardItem = (name) => {
+        const boardName = document.getElementById(name);
+        boardName.textContent = `${name} [ ${(this.model.cardStorage.filter(element => element.nameBoard === name)).length} ]`
+    }
+
+    renderCountCardstart = (name) => {
+        for (let key of name) {
+            const boardName = document.getElementById(key);
+            console.log(boardName);
+            boardName.textContent = `${key} [ ${(this.model.cardStorage.filter(element => element.nameBoard === key)).length} ]`
         }
     }
 
