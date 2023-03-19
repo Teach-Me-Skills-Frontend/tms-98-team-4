@@ -26,9 +26,6 @@ export class CardList {
     });
   };
 
-  // renderBtnAdded = (id) =>{
-  //   const card = document.getElementById(`${id}`);   
-  // }
 
   openPhoto = (src) => {
     const modalDiv = document.createElement('div');

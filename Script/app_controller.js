@@ -17,8 +17,8 @@ export class CardController {
         getNewData(searchURL)
             .then(
                 data => {
-                    this.model.setCards(data.results);
-                    this.view.renderCards(this.model.getCards());
+                    this.model.setCardsSearch(data.results);
+                    this.view.renderCards(this.model.getCardsSearch());
                 })
     }
 
@@ -107,7 +107,9 @@ export class CardController {
     }
 
     restartMain = () => {
-        this.initialize();
+        if (this.model.getCardsSearch().length > 0) {
+            this.view.renderCards(this.model.getCardsSearch());
+        } else this.initialize();
     }
 
     refreshLocal = () => {

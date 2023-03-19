@@ -51,6 +51,7 @@ export function getNewData(url) {
 export class CardModel {
     constructor() {
         this.cards = [];
+        this.searcgCards = [];
         this.cardStorage = getSaveCards();
         this.cardStorageForbiddent = getForbiddenCards();
         this.cardContainer = document.querySelectorAll('div');
@@ -64,15 +65,23 @@ export class CardModel {
         return this.cards.slice();
     }
 
+    setCardsSearch(searcgCards) {
+        this.searcgCards = searcgCards;
+    }
+
+    getCardsSearch() {
+        return this.searcgCards.slice();
+    }
+
     saveLocal(name, id) {
         let nameBoard = { nameBoard: `${name}` }
-        this.cardStorage.push({ ...this.getCards().find(card => card.id === id), ...nameBoard });
+        this.cardStorage.push({ ...this.getCards().find(card => card.id === id), ...nameBoard, ...this.getCardsSearch().find(card => card.id === id), ...nameBoard });
         localStorage.setItem(LocalStorageKey.boards, JSON.stringify(this.cardStorage));
     }
 
     saveLocalForbidden(name, id) {
         let nameBoard = { nameBoard: `${name}` }
-        this.cardStorageForbiddent.push({ ...this.getCards().find(card => card.id === id), ...nameBoard });
+        this.cardStorageForbiddent.push({ ...this.getCards().find(card => card.id === id), ...nameBoard, ...this.getCardsSearch().find(card => card.id === id), ...nameBoard });
         localStorage.setItem(LocalStorageKey.boardsForbidden, JSON.stringify(this.cardStorageForbiddent));
     }
 
