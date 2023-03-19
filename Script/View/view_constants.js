@@ -4,7 +4,7 @@ export const AddBtnNames = {
 	addPin: "add on Board",
 	label: "Pinterest",
 	pickBoard: 'Boards',
-	deleteAllboards: 'Delete all boards',
+	deleteAllboards: 'clean all boards',
 	cleanboard: 'clean '
 };
 
@@ -25,6 +25,7 @@ export const ModalAction = {
 	addboard: 'add to a board',
 	complain: "complain",
 	addCardBoard: 'addCardBoard',
+	deleteCard: 'delete card out of boards'
 };
 
 export const cardBoardAction = {

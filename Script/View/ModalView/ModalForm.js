@@ -2,6 +2,7 @@ import { ModalAction } from '../view_constants.js';
 import { ComplainModal } from '../ModalView/ModalAddBan/ModalComplain.js';
 import { createCardModal } from '../ModalView/ModalView_utils.js';
 import { BoardModal } from './ModalAddCard/ModalAddCard.js';
+import { CardModel } from '../../Model/model_index.js';
 
 
 export class ModalForm {
@@ -9,6 +10,7 @@ export class ModalForm {
         this.modalComplain = new ComplainModal(onModalAction);
         this.boardModal = new BoardModal(onModalAction)
         this.cardModal = createCardModal();
+        this.model = new CardModel();
         this.cardModal.addEventListener('click', ({ target }) => {
             if (Object.values(ModalAction).includes(target.dataset.modalAction)) {
                 onModalAction(target.dataset.modalAction, target.name);
@@ -25,6 +27,11 @@ export class ModalForm {
             children[i].setAttribute('name', `${cardId}`)
         }
         card.append(this.cardModal);
+        const btn = document.getElementById(`${ModalAction.deleteCard}`);
+        if (this.model.getLocal().find(element => element.id !== cardId) || this.model.getLocal().find(element => element.id !== cardId) === undefined) {
+            btn.setAttribute('disabled', 'disabled')
+        } if (this.model.getLocal().find(element => element.id === cardId)
+            && btn.hasAttribute('disabled')) { btn.removeAttribute('disabled'); }
         this.closeModal();
     }
 
@@ -36,6 +43,10 @@ export class ModalForm {
 
     clearCheckBoxes = () => {
         [...document.getElementsByClassName('form-check-input')].forEach(item => { item.checked = false })
+    }
+
+    closeModalBoard = () => {
+        this.boardModal.modalBoardContainer.remove();
     }
 
     openComplainModal = (cardId) => {

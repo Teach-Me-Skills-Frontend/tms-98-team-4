@@ -83,10 +83,19 @@ export class CardModel {
 
     cleanBoard = (name) => {
         const filter = this.cardStorage.filter((value) => value.nameBoard === name);
-        console.log(filter);
         for (let i = 0; i < filter.length; i += 1) {
             const cardIndex = this.cardStorage.findIndex((value) => value.nameBoard === name);
-            console.log(cardIndex);
+            if (cardIndex > -1) {
+                this.cardStorage.splice(cardIndex, 1);
+                localStorage.setItem(LocalStorageKey.boards, JSON.stringify(this.cardStorage));
+            }
+        }
+    }
+
+    deleteCard = (id) => {
+        const filter = this.cardStorage.filter((value) => value.id === id);
+        for (let i = 0; i < filter.length; i += 1) {
+            const cardIndex = this.cardStorage.findIndex((value) => value.id === id);
             if (cardIndex > -1) {
                 this.cardStorage.splice(cardIndex, 1);
                 localStorage.setItem(LocalStorageKey.boards, JSON.stringify(this.cardStorage));

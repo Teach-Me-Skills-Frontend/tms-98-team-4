@@ -14,6 +14,13 @@ export function createCardModal() {
     btnBaseModalComplain.classList.add('btn-warning', 'button-modal');
     btnBaseModalComplain.setAttribute('data-modal-action', `${ModalAction.complain}`);
 
-    cardModal.append(btnBaseModalAddBoard, btnBaseModalComplain);
+    const btnBaseModalDelte = createBtn(ModalAction.deleteCard);
+    btnBaseModalDelte.classList.add('btn-danger', 'button-modal');
+    btnBaseModalDelte.setAttribute('data-modal-action', `${ModalAction.deleteCard}`);
+    btnBaseModalDelte.classList.add('btn-danger', 'button-modal');
+    // btnBaseModalDelte.setAttribute('disabled', 'disabled');
+    btnBaseModalDelte.setAttribute('id', `${ModalAction.deleteCard}`);
+
+    cardModal.append(btnBaseModalAddBoard, btnBaseModalComplain, btnBaseModalDelte);
     return cardModal;
 }

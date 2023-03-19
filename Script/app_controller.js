@@ -63,6 +63,10 @@ export class CardController {
             case ModalAction.addCardBoard:
                 this.addCardBoard(payload, id);
                 break;
+            case ModalAction.deleteCard:
+                this.deleteCard(payload);
+                break;
+
         }
     }
 
@@ -92,6 +96,13 @@ export class CardController {
         }
     }
 
+
+    deleteCard = (id) => {
+        this.model.deleteCard(id)
+        this.renderCountCardstart(boardNames);
+        const btn = document.getElementById(ModalAction.deleteCard);
+        btn.setAttribute('disabled', 'disabled');
+    }
 
     restartMain = () => {
         this.initialize();
@@ -153,6 +164,7 @@ export class CardController {
             this.model.saveLocal(name, id);
         }
         this.renderCountCardItem(name);
+        this.modalForm.closeModalBoard();
     }
 
     renderCountCardItem = (name) => {
@@ -166,6 +178,7 @@ export class CardController {
             boardName.textContent = `${key} [ ${(this.model.cardStorage.filter(element => element.nameBoard === key)).length} ]`
         }
     }
+
 
     addComplaint = (name, id) => {
         if ([...document.getElementsByClassName('form-check-input')].find(item => { return item.checked })) {
