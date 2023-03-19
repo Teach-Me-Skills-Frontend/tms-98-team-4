@@ -58,7 +58,7 @@ export class CardController {
                 this.openBoardModal(payload);
                 break;
             case ModalAction.cancelAdd:
-                this.closeAddModal(payload);
+                this.closeAddModal(payload, id);
                 break;
             case ModalAction.addCardBoard:
                 this.addCardBoard(payload, id);
@@ -74,8 +74,10 @@ export class CardController {
         this.modalForm.openBoardModal(id)
     }
 
-    closeAddModal = () => {
+    closeAddModal = (payload, id) => {
         this.modalForm.closeAddModal();
+        this.modalForm.openModal(id);
+
     }
 
 
@@ -146,7 +148,8 @@ export class CardController {
         this.view.openComplainModal();
     }
 
-    closeComplainModal = () => {
+    closeComplainModal = (id) => {
+        this.modalForm.openModal(id);
         this.modalForm.closeComplainModal();
     }
 

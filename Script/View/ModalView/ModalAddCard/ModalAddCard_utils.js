@@ -28,7 +28,8 @@ export function createBoardModal() {
     btnCancel.classList.add('btn-outline-danger');
     btnCancel.setAttribute('data-modal-action', `${ModalAction.cancelAdd}`);
     btnCancel.textContent = 'Return';
-    boardModal.append(modalDescription, modalBoardContainer, btnCancel);
+    modalBoardContainer.append(btnCancel);
+    boardModal.append(modalDescription, modalBoardContainer);
 
     return boardModal;
 }
