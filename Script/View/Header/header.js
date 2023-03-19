@@ -55,9 +55,7 @@ export class Header {
                 })
                 break;
             case HeaderAction.reload:
-                let rebootUrl = `https://api.unsplash.com/photos?page=
-                ${this.randomNumberReboot()}&per_page=28&client_id=04ufwLfYkUW_uO9OlQOojuE9hQFxR0veEPagGYh0VGA`;
-                this.onHeaderAction(HeaderAction.reload, rebootUrl);
+                this.onHeaderAction(HeaderAction.reload);
         }
     }
 }
