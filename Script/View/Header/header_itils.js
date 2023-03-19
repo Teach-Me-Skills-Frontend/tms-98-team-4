@@ -4,7 +4,9 @@ import { HeaderAction, AddBtnNames, BoardsAction } from '../view_constants.js';
 export function createHeader() {
     const header = document.createElement('header');
     header.classList.add(
-        'container-sm', 'd-flex', 'justify-content-evenly', 'header_spacing', 'mb-4');
+        'container-lg', 'd-flex', 'flex-wrap', 'justify-content-evenly', 'header_spacing', 'mb-4', 'padding-header', 'bg-light', 'rounded-pill', 'fixed-top', 'shadow-header');
+    header.setAttribute('id', 'header')
+
 
     const btnLabel = createBtn(AddBtnNames.label);
     btnLabel.classList.add('btn-warning');

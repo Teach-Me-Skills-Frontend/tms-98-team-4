@@ -18,7 +18,7 @@ export function createSearchInput() {
     input.setAttribute('type', 'text');
     input.setAttribute('data-header-action', `${HeaderAction.search}`);
     input.setAttribute('placeholder', 'search...');
-    input.classList.add('form-control', 'text-center', 'input-gap');
+    input.classList.add('form-control', 'text-center', 'input-gap', 'rounded-pill');
 
     return input;
 }
