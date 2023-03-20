@@ -150,7 +150,6 @@ export class CardController {
         card.remove();
     }
 
-
     returnMain = () => {
         this.view.renderCards(this.model.getCards());
         this.view.removeBoardsInfo();
