@@ -132,7 +132,9 @@ export function addSearchElements(searchURL, amount) {
     searchInfo.setAttribute('id', 'search-info');
     searchInfo.classList.add('search-info', 'container-sm', 'd-flex', 'justify-content-evenly');
 
-    const searchQuery = searchURL.match(/(?<=&query=)(.*)(?=&per)/g)[0];
+    console.log(searchURL);
+
+    const searchQuery = searchURL.match(/(?<=per_page=28&query=)(.*)(?=)/g)[0];
     
     searchInfo.textContent = `${amount} pictures found for: "${searchQuery}"`;
     

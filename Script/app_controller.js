@@ -26,13 +26,13 @@ export class CardController {
         let linkArr = [];
         const pageURLs = {};
 
-        if (response.bodyUsed) {
+        if (response.headers.get('link')) {
             linkArr = response.headers.get('link').split(',');
             setPageURLs(linkArr, pageURLs);
         } else {
             setPageURLs(linkArr, pageURLs);
-        }    
-        
+        }
+
         const responseJSON = await response.json();
 
         if (!document.getElementById('btn-container')){
