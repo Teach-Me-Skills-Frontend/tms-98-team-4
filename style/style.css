@@ -117,11 +117,6 @@ padding-top: calc(5vw + 100px);
    animation: zoom 0.3s ease-in-out;
 }
 
-.deleting {
-  transform: scale(0);
-  transition-duration: 1s;
-}
-
 @keyframes zoom {
    from {
       transform: scale(0);
@@ -129,15 +124,6 @@ padding-top: calc(5vw + 100px);
    to {
       transform: scale(1);
    }
-}
-
-@keyframes reduce {
-  from {
-     transform: scale(1);
-  }
-  to {
-     transform: scale(0);
-  }
 }
 
 .modal-div img {
@@ -207,7 +193,6 @@ header {
 
 .padding-header{
   padding: calc(5px + 1vw);
-  margin-top: 2vw;
 }
 
 .dropdown-content a {
@@ -260,4 +245,56 @@ header {
 
 .shadow{
   position: relative;
+}
+
+.app-card{
+  padding-top: 2vw;
+}
+
+#btn-container{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px 15px;
+}
+
+.button_curr {
+  pointer-events: none;
+}
+
+.button-page{
+  width: 50px;
+  height: 50px;
+}
+
+.next {
+  background: url(./img/forward-singe-arrow.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+}
+
+.last {
+  background: url(./img/forward-double-arrow.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+}
+
+.prev {
+  background: url(./img/back-single-arrow.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+}
+
+.first {
+  background: url(./img/back-double-arrow.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+}
+
+.search-info {
+  font-size: 1.5rem;
 }

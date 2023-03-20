@@ -4,7 +4,7 @@ import { HeaderAction, AddBtnNames, BoardsAction } from '../view_constants.js';
 export function createHeader() {
     const header = document.createElement('header');
     header.classList.add(
-        'container-lg', 'd-flex', 'flex-wrap', 'justify-content-evenly', 'header_spacing', 'mb-4', 'padding-header', 'bg-light', 'rounded-pill', 'fixed-top', 'shadow-header');
+        'container-lg', 'd-flex', 'flex-wrap', 'justify-content-evenly', 'header_spacing', 'mb-4', 'padding-header', 'bg-light', 'rounded-pill', 'shadow-header');
     header.setAttribute('id', 'header')
 
 

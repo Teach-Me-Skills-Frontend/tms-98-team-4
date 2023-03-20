@@ -4,6 +4,8 @@ import { CardAction } from './basic_constants.js';
 import { ModalAction, boardNames, BoardsAction, HeaderAction } from './View/view_constants.js';
 import { ModalForm } from './View/ModalView/ModalForm.js';
 import { LocalStorageKey } from './Model/model_index.js';
+import { removeListeners, setPageURLs, setCurrPage } from './app_controller_utils.js';
+import { addSearchElements, removeSearchElements } from './View/view_utils.js';
 
 export class CardController {
     constructor(containerId) {
@@ -13,14 +15,49 @@ export class CardController {
         this.render = this.renderCountCardstart(boardNames);
     }
 
-    getSearch(url) {
-        console.log(url)
-        this.model.getSearchData(url)
-            .then(
-                data => {
-                    this.model.setCardsSearch(data.results);
-                    this.view.renderCards(this.model.getCardsSearch());
+    async getSearch(searchURL) {
+        
+        removeListeners();
+        if (document.getElementById('search-info')) {
+            removeSearchElements();
+        }
+        
+        const response = await fetch(searchURL);
+        let linkArr = [];
+        const pageURLs = {};
+
+        if (response.bodyUsed) {
+            linkArr = response.headers.get('link').split(',');
+            setPageURLs(linkArr, pageURLs);
+        } else {
+            setPageURLs(linkArr, pageURLs);
+        }    
+        
+        const responseJSON = await response.json();
+
+        if (!document.getElementById('btn-container')){
+            addSearchElements(searchURL, responseJSON.total);
+        }
+        setCurrPage(searchURL);
+
+        this.model.setCards(responseJSON.results);
+        this.view.renderCards(this.model.getCards());
+        this.assignNextURL(pageURLs);
+    }
+
+    assignNextURL(pageURLs) {
+        const buttons = Array.from(document.querySelectorAll('[id*=button_]'))
+        
+        for (const button of buttons) {
+            const type = button.getAttribute('id').split('_')[1];
+
+            if (Object.keys(pageURLs).includes(type)){
+                button.addEventListener('click', () => {
+                    window.scrollTo({top: 100, behavior: "smooth"});
+                    this.getSearch(pageURLs[type]);
                 })
+            }
+        }
     }
 
     getReboot() {
@@ -125,7 +162,13 @@ export class CardController {
 
     loadBoard = (name) => {
         if (this.model.getLocal().find(element => element.nameBoard === name)) {
+
             this.view.renderCards(this.model.getLocal().filter(element => element.nameBoard === name));
+
+            if ((document.getElementById('btn-container'))){
+                removeSearchElements();
+            }
+
         } else alert('here nothinng added yet');
     }
 
@@ -214,6 +257,9 @@ export class CardController {
                 data => {
                     this.model.setCards(data);
                     this.view.renderCards(this.model.getCards());
+                    if ((document.getElementById('btn-container'))){
+                        removeSearchElements();
+                    }
                 })
     }
 }
