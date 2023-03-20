@@ -26,6 +26,9 @@ export class CardList {
     });
   };
 
+  renderEmptyList = () => {
+    this.cardContainer.innerHTML = '';
+  }
 
   openPhoto = (src) => {
     const modalDiv = document.createElement('div');

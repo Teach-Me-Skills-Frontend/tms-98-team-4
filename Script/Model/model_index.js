@@ -45,7 +45,7 @@ export class CardModel {
 
     getData() {
         const number = Math.floor(Math.random() * 334);
-        const url = `https://api.unsplash.com/photos?page=${number}&per_page=30&client_id=04ufwLfYkUW_uO9OlQOojuE9hQFxR0veEPagGYh0VGA`;
+        const url = `https://api.unsplash.com/photos?page=${number}&per_page=28&client_id=04ufwLfYkUW_uO9OlQOojuE9hQFxR0veEPagGYh0VGA`;
         return fetch(url)
             .then((response) => response.json())
             .catch(err => alert(err))
@@ -65,9 +65,6 @@ export class CardModel {
         return this.cards.slice();
     }
 
-    getUrl = () => {
-        return this.url;
-    }
 
     setCardsSearch(searchCards) {
         this.searchCards = searchCards;

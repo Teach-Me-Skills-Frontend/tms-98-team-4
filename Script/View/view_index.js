@@ -34,4 +34,21 @@ export class View {
 	openPhoto = (src) => {
 		this.cardList.openPhoto(src);
 	}
+	renderBoardInfo(numberItems, name) {
+		this.header.renderBoardInfo(numberItems, name);
+	}
+
+	removeBoardsInfo() {
+		this.header.removeBoardsInfo();
+	}
+
+	renderEmptyList() {
+		this.cardList.renderEmptyList();
+	}
+
+	openModalAlert = (cardId) => {
+		const card = document.getElementById(cardId);
+		card.append(this.cardModal);
+	}
+
 }

@@ -25,3 +25,16 @@ export function createHeader() {
 
     return header;
 }
+
+export function boardsInfo(name, numberItems) {
+    const boardsInfo = document.createElement('p');
+    boardsInfo.setAttribute('id', 'board-info');
+    boardsInfo.setAttribute('name', name);
+    boardsInfo.classList.add('search-info', 'container-sm', 'd-flex', 'justify-content-evenly');
+
+    if (numberItems === 0) {
+        boardsInfo.textContent = `you are on ${name}, but here nothing yet)`;
+    } else boardsInfo.textContent = `you are on ${name} with [${numberItems}] picture(s)`;
+
+    return boardsInfo;
+}

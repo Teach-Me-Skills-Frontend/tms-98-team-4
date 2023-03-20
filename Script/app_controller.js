@@ -16,12 +16,12 @@ export class CardController {
     }
 
     async getSearch(searchURL) {
-        
+
         removeListeners();
         if (document.getElementById('search-info')) {
             removeSearchElements();
         }
-        
+
         const response = await fetch(searchURL);
         let linkArr = [];
         const pageURLs = {};
@@ -35,25 +35,26 @@ export class CardController {
 
         const responseJSON = await response.json();
 
-        if (!document.getElementById('btn-container')){
+        if (!document.getElementById('btn-container')) {
             addSearchElements(searchURL, responseJSON.total);
         }
         setCurrPage(searchURL);
 
-        this.model.setCards(responseJSON.results);
-        this.view.renderCards(this.model.getCards());
+        this.model.setCardsSearch(responseJSON.results);
+        this.view.renderCards(this.model.getCardsSearch());
         this.assignNextURL(pageURLs);
+
     }
 
     assignNextURL(pageURLs) {
         const buttons = Array.from(document.querySelectorAll('[id*=button_]'))
-        
+
         for (const button of buttons) {
             const type = button.getAttribute('id').split('_')[1];
 
-            if (Object.keys(pageURLs).includes(type)){
+            if (Object.keys(pageURLs).includes(type)) {
                 button.addEventListener('click', () => {
-                    window.scrollTo({top: 100, behavior: "smooth"});
+                    window.scrollTo({ top: 100, behavior: "smooth" });
                     this.getSearch(pageURLs[type]);
                 })
             }
@@ -97,7 +98,7 @@ export class CardController {
                 this.addCardBoard(payload, id);
                 break;
             case ModalAction.deleteCard:
-                this.deleteCard(payload);
+                this.deleteCard(payload, id);
                 break;
 
         }
@@ -113,17 +114,16 @@ export class CardController {
 
     }
 
-
     onBoardAction = (action, payload = undefined) => {
         switch (action) {
             case BoardsAction.loadBoard:
                 this.loadBoard(payload);
                 break;
             case BoardsAction.cleanBoardsCards:
-                this.refreshLocal();
+                this.cleanAllBoards();
                 break;
             case BoardsAction.returnToTheMainPage:
-                this.restartMain();
+                this.returnMain();
                 break;
             case BoardsAction.cleanBoard:
                 this.cleanBoard(payload);
@@ -137,40 +137,68 @@ export class CardController {
         this.renderCountCardstart(boardNames);
         const btn = document.getElementById(ModalAction.deleteCard);
         btn.setAttribute('disabled', 'disabled');
-    }
-
-    restartMain = () => {
-        if (this.model.getCardsSearch().length > 0) {
-            this.view.renderCards(this.model.getCardsSearch());
-        } else this.initialize();
-    }
-
-    refreshLocal = () => {
-        if (confirm("Are you sure?")) {
-            this.model.refreshLocal();
-            this.initialize();
-        } else {
-            return;
+        for (let key of boardNames) {
+            console.log(this.model.getLocal());
+            const deletedCards = this.model.getLocal().filter(element => element.nameBoard === key);
+            console.log(deletedCards);
+            const number = deletedCards.length;
+            for (let i = 0; i <= number; i += 1) {
+                if (document.getElementById('board-info').getAttribute('name') === key) {
+                    console.log(document.getElementById('board-info').getAttribute('name') === key);
+                    this.view.removeBoardsInfo();
+                    this.view.renderBoardInfo(key, number);
+                    this.model.getLocal()
+                }
+            }
         }
+
+        const card = document.getElementById(`${id}`);
+        card.remove();
+    }
+
+    returnMain = () => {
+        this.view.renderCards(this.model.getCards());
+        this.view.removeBoardsInfo();
+    }
+
+    cleanAllBoards = () => {
+        if (this.model.getLocal().length === 0) {
+            alert("nothing to delete")
+        }
+        else {
+            confirm("Are you sure?");
+            this.model.refreshLocal();
+        }
+        this.view.renderCards(this.model.getCards())
         this.renderCountCardstart(boardNames);
+        this.view.removeBoardsInfo();
     }
 
     cleanBoard = (name) => {
         this.model.cleanBoard(name);
         this.renderCountCardItem(name);
+        const numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
+        this.view.removeBoardsInfo();
+        this.view.renderBoardInfo(name, numberCards)
+        if (numberCards === 0) {
+            this.view.renderEmptyList()
+        }
     }
 
     loadBoard = (name) => {
+        const numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
         if (this.model.getLocal().find(element => element.nameBoard === name)) {
-
-            this.view.renderCards(this.model.getLocal().filter(element => element.nameBoard === name));
-
-            if ((document.getElementById('btn-container'))){
+            if ((document.getElementById('btn-container'))) {
                 removeSearchElements();
             }
-
-        } else alert('here nothinng added yet');
+            this.view.renderCards(this.model.getLocal().filter(element => element.nameBoard === name));
+            this.view.removeBoardsInfo();
+            this.view.renderBoardInfo(name, numberCards)
+        } else this.view.renderEmptyList();
+        this.view.removeBoardsInfo();
+        this.view.renderBoardInfo(name, numberCards)
     }
+
 
     openComplainModal = (id) => {
         this.modalForm.openComplainModal(id);
@@ -202,7 +230,7 @@ export class CardController {
         if (this.model.getLocal() === null) {
             this.model.saveLocal(name, id);
         } else if ((this.model.getLocal().find(element => element.nameBoard === name && element.id === id))) {
-            alert('already added')
+            this.modalForm.openModalAlert(id);
         } else if
             ((this.model.getLocal().find(element => element.nameBoard === name && element.id === id)) === undefined) {
             this.model.saveLocal(name, id);
@@ -257,7 +285,7 @@ export class CardController {
                 data => {
                     this.model.setCards(data);
                     this.view.renderCards(this.model.getCards());
-                    if ((document.getElementById('btn-container'))){
+                    if ((document.getElementById('btn-container'))) {
                         removeSearchElements();
                     }
                 })

@@ -1,6 +1,6 @@
 import { ModalAction } from '../view_constants.js';
 import { ComplainModal } from '../ModalView/ModalAddBan/ModalComplain.js';
-import { createCardModal } from '../ModalView/ModalView_utils.js';
+import { createCardModal, createdalAlert } from '../ModalView/ModalView_utils.js';
 import { BoardModal } from './ModalAddCard/ModalAddCard.js';
 import { CardModel } from '../../Model/model_index.js';
 
@@ -28,7 +28,7 @@ export class ModalForm {
         }
         card.append(this.cardModal);
         const btn = document.getElementById(`${ModalAction.deleteCard}`);
-        if (this.model.getLocal().find(element => element.id !== cardId) || this.model.getLocal().find(element => element.id !== cardId) === undefined) {
+        if (this.model.getLocal().find(element => element.id !== cardId) === undefined) {
             btn.setAttribute('disabled', 'disabled')
         } if (this.model.getLocal().find(element => element.id === cardId)
             && btn.hasAttribute('disabled')) { btn.removeAttribute('disabled'); }
@@ -39,6 +39,16 @@ export class ModalForm {
         this.cardModal.addEventListener('mouseleave', () => {
             this.cardModal.remove();
         });
+    }
+
+    openModalAlert = (cardId) => {
+        console.log('hello')
+        const card = document.getElementById(cardId);
+        card.append(createdalAlert());
+        function closeModalAlert() {
+            document.getElementById(`${ModalAction.alert}`).remove();
+        }
+        setTimeout(closeModalAlert, 2000);
     }
 
     clearCheckBoxes = () => {

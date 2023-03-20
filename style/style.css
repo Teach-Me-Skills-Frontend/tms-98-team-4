@@ -27,6 +27,10 @@
   flex: 0 1 auto;
 }
 
+.board-info{
+  font-size: 2rem;
+}
+
 .btn-lg{
   min-width: 200px;
 }
@@ -102,6 +106,11 @@ padding-top: calc(5vw + 100px);
 .button-modal {
   display: block;
   width: 82%;
+}
+
+.alert-modal{
+  color: #ddd;
+  font-size: 2rem;
 }
 
 

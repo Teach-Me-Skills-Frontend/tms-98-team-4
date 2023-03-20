@@ -25,7 +25,8 @@ export const ModalAction = {
 	addboard: 'add to a board',
 	complain: "complain",
 	addCardBoard: 'addCardBoard',
-	deleteCard: 'delete card out of boards'
+	deleteCard: 'delete card out of boards',
+	alert: 'alert-added'
 };
 
 export const cardBoardAction = {

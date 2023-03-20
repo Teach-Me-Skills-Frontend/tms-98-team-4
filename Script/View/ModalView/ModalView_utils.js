@@ -18,9 +18,18 @@ export function createCardModal() {
     btnBaseModalDelte.classList.add('btn-danger', 'button-modal');
     btnBaseModalDelte.setAttribute('data-modal-action', `${ModalAction.deleteCard}`);
     btnBaseModalDelte.classList.add('btn-danger', 'button-modal');
-    // btnBaseModalDelte.setAttribute('disabled', 'disabled');
+    btnBaseModalDelte.setAttribute('disabled', 'disabled');
     btnBaseModalDelte.setAttribute('id', `${ModalAction.deleteCard}`);
 
     cardModal.append(btnBaseModalAddBoard, btnBaseModalComplain, btnBaseModalDelte);
+    return cardModal;
+}
+
+export function createdalAlert() {
+    const cardModal = document.createElement('div');
+    cardModal.classList.add('card-modal', 'alert-modal');
+    cardModal.setAttribute('id', `${ModalAction.alert}`)
+    cardModal.textContent = 'Already added';
+
     return cardModal;
 }
