@@ -26,9 +26,7 @@ export class Header {
         event.preventDefault();
         const { value } = this.cardContainer.children[1].firstChild;
         const formattedValue = value.trim();
-        let searchURL = `https://api.unsplash.com/search/photos?page=
-        ${this.randomNumberSearch()}&query=${formattedValue}
-        &per_page=28&client_id=04ufwLfYkUW_uO9OlQOojuE9hQFxR0veEPagGYh0VGA`;
+        let searchURL = `https://api.unsplash.com/search/photos?client_id=04ufwLfYkUW_uO9OlQOojuE9hQFxR0veEPagGYh0VGA&query=${formattedValue}&per_page=28`;
         if (formattedValue) {
             this.onHeaderAction(HeaderAction.search, searchURL);
             this.cardContainer.children[1].reset();
