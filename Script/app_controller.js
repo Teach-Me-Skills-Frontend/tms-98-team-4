@@ -4,8 +4,7 @@ import { CardAction } from './basic_constants.js';
 import { ModalAction, boardNames, BoardsAction, HeaderAction } from './View/view_constants.js';
 import { ModalForm } from './View/ModalView/ModalForm.js';
 import { LocalStorageKey } from './Model/model_index.js';
-import { removeListeners, setPageURLs, setCurrPage } from './app_controller_utils.js';
-import { addSearchElements, removeSearchElements } from './View/view_utils.js';
+import { removeSearchElements } from './View/view_utils.js';
 
 export class CardController {
     constructor(containerId) {
@@ -16,34 +15,9 @@ export class CardController {
     }
 
     async getSearch(searchURL) {
-
-        removeListeners();
-        if (document.getElementById('search-info')) {
-            removeSearchElements();
-        }
-
-        const response = await fetch(searchURL);
-        let linkArr = [];
-        const pageURLs = {};
-
-        if (response.headers.get('link')) {
-            linkArr = response.headers.get('link').split(',');
-            setPageURLs(linkArr, pageURLs);
-        } else {
-            setPageURLs(linkArr, pageURLs);
-        }
-
-        const responseJSON = await response.json();
-
-        if (!document.getElementById('btn-container')) {
-            addSearchElements(searchURL, responseJSON.total);
-        }
-        setCurrPage(searchURL);
-
-        this.model.setCardsSearch(responseJSON.results);
+        await this.model.getSearch(searchURL);
         this.view.renderCards(this.model.getCardsSearch());
-        this.assignNextURL(pageURLs);
-
+        this.assignNextURL(this.model.pageURLs);
     }
 
     assignNextURL(pageURLs) {
@@ -52,10 +26,10 @@ export class CardController {
         for (const button of buttons) {
             const type = button.getAttribute('id').split('_')[1];
 
-            if (Object.keys(pageURLs).includes(type)) {
+            if (Object.keys(this.model.pageURLs).includes(type)) {
                 button.addEventListener('click', () => {
                     window.scrollTo({ top: 100, behavior: "smooth" });
-                    this.getSearch(pageURLs[type]);
+                    this.getSearch(this.model.pageURLs[type]);
                 })
             }
         }
