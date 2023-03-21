@@ -1,5 +1,10 @@
 @import url(media.css);
 
+body{
+  --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+}
+
 .card {
    max-width: 20%;
    border-radius: 30px;

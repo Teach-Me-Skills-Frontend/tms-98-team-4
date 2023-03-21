@@ -5,7 +5,7 @@ import { BoardModal } from "./ModalView/ModalAddCard/ModalAddCard.js";
 
 function createPinterestAppCard(header, cardList) {
 	const appCard = document.createElement('div');
-	appCard.classList.add('app-card', 'bg-light');
+	appCard.classList.add('app-card');
 	appCard.setAttribute('id', 'app-card');
 
 	appCard.append(header, cardList);
