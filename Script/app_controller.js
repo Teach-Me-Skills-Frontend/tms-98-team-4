@@ -125,6 +125,9 @@ export class CardController {
         }
         const card = document.getElementById(`${id}`);
         card.remove();
+        if (number === 0) {
+            this.view.renderEmptyList();
+        }
     }
 
     returnMain = () => {
@@ -163,15 +166,25 @@ export class CardController {
     }
 
     loadBoard = (name) => {
-        const numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
-        if (this.model.getLocal().find(element => element.nameBoard === name)) {
-            removeSearchElements();
-            this.view.renderCards(this.model.getLocal().filter(element => element.nameBoard === name));
+        if (this.model.cardStorage.length > 0) {
+            const numberCards = (this.model.cardStorage.filter(element => element.nameBoard === name)).length;
+            if (this.model.cardStorage.find(element => element.nameBoard === name)) {
+                if ((document.getElementById('btn-container'))) {
+                    removeSearchElements();
+                }
+                this.view.renderCards(this.model.getLocal().filter(element => element.nameBoard === name));
+                this.view.removeBoardsInfo();
+                this.view.renderBoardInfo(name, numberCards)
+            } else this.view.renderEmptyList();
             this.view.removeBoardsInfo();
             this.view.renderBoardInfo(name, numberCards)
-        } else this.view.renderEmptyList();
-        this.view.removeBoardsInfo();
-        this.view.renderBoardInfo(name, numberCards)
+        } else {
+            if ((document.getElementById('btn-container'))) {
+                removeSearchElements();
+            }
+            this.view.renderEmptyList();
+            this.view.removeBoardsInfo(); this.view.renderBoardInfo(name, 0);
+        }
     }
 
 

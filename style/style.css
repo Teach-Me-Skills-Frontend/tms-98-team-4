@@ -1,5 +1,15 @@
 @import url(media.css);
 
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+    padding-top: 1vw;
+}
+
 .card {
    max-width: 20%;
    border-radius: 30px;
@@ -28,11 +38,16 @@
 }
 
 .board-info{
-  font-size: 2rem;
+  font-size: 2rem;  
+}
+
+#alert-added{
+  color: #ffc107;
+  font-size: 2rem;  
 }
 
 .btn-lg{
-  min-width: 200px;
+  min-width: 170px;  
 }
 
 body{
@@ -103,8 +118,7 @@ padding-top: calc(5vw + 100px);
   animation: zoom 0.3s ease-in-out;
 }
 
-.button-modal {
-  display: block;
+.button-modal {  
   width: 82%;
 }
 
@@ -258,6 +272,8 @@ header {
 
 .app-card{
   padding-top: 2vw;
+  max-width: 1400px;
+  margin: 0 auto;  
 }
 
 #btn-container{
@@ -307,3 +323,25 @@ header {
 .search-info {
   font-size: 1.5rem;
 }
+
+#header {  
+  position: fixed;
+  top: 0;     
+  margin: 1vw;
+  width: 100%;
+  transition: top 0.3s; 
+  z-index: 100;
+  max-width: 1400px;
+}
+
+#board-info{
+  padding-top: 80px;
+  text-align: center;
+  margin-bottom: -80px;
+}
+
+#card-container{
+  margin-top: 80px;
+}
+
+@import url(media.css);

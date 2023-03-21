@@ -93,7 +93,8 @@ export function createCheckBoxesСomplain(causes) {
         checkBoxLabel.classList.add('form-check-label');
 
         checkBoxLabel.textContent = causesComplains[key];
-        checkBoxContainer.append(checkBoxinput, checkBoxLabel)
+        checkBoxLabel.append(checkBoxinput)
+        checkBoxContainer.append(checkBoxLabel)
 
         checkBoxContainerBasic.append(checkBoxContainer);
     }
@@ -149,3 +150,14 @@ export function removeSearchElements() {
         document.getElementById('search-info').remove();
     }
 }
+
+let prevScrollpos = window.pageYOffset;
+window.onscroll = function () {
+    let currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+        document.getElementById("header").style.top = "0";
+    } else {
+        document.getElementById("header").style.top = "-200px";
+    }
+    prevScrollpos = currentScrollPos;
+} 

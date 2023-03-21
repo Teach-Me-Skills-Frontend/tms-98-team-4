@@ -59,7 +59,7 @@ export class Header {
     }
 
     renderBoardInfo = (numberItems, name) => {
-        document.getElementById('header').after(boardsInfo(numberItems, name));
+        document.getElementById('card-container').before(boardsInfo(numberItems, name));
     }
 
     removeBoardsInfo = () => {

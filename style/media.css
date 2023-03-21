@@ -6,7 +6,7 @@
     min-width: 300px;
   }
   #header{
-    gap:2vw !important;
+    gap:1vw !important;
     flex-direction: column !important;
     text-align: center !important;
     align-items: center !important;
@@ -14,8 +14,24 @@
   .padding-top{
     padding-top: 250px !important;
   }
+
+  #board-info{
+    padding-top: 160px !important;    
+    margin-bottom: -130px !important;
+  }
   .card{
   min-width: 45% !important;
+  }
+
+  .btn-lg{
+    max-height: 55px;
+    display: flex;
+    align-items: center;    
+    justify-content: center;
+  }
+  
+  #card-container{
+    margin-top: 160px !important;
   }
 }
 
@@ -31,13 +47,22 @@
   .mb-4 {
     margin-top: 1.5rem;
   }
-  .padding-top {
+  /* .padding-top {
     padding-top: 230px !important;
-  }
+  } */
+  /* #card-container{
+    margin-top: 210px;
+  }  
+  #board-info{    
+    margin-bottom: -210px !important;
+  } */
 }
 
 @media (max-width: 550px) {
   .card {
   min-width: 90% !important;
+  }
+  .img-container {    
+    max-height: 400px !important;
   }
 }
