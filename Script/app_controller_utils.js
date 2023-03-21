@@ -10,8 +10,6 @@ export function removeListeners() {
 
 export function setPageURLs (linkArr, pageURLs) {
     for (const link of linkArr) {
-        console.log(linkArr);
-        console.log(link);
         const urlType = link.split(/[""]/)[1];
         pageURLs[urlType] = link.split(/[<>]/)[1];
     }

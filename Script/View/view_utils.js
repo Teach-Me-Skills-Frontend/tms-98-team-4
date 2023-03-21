@@ -63,9 +63,15 @@ export function createBoard() {
     const returnToTheMainPage = document.createElement('a');
     returnToTheMainPage.textContent = AddBtnNames.deleteAllboards;
     returnToTheMainPage.setAttribute('data-board-action', BoardsAction.returnToTheMainPage);
-    boardDrop.append(returnToTheMainPage)
+    boardDrop.append(returnToTheMainPage);
     returnToTheMainPage.textContent = `${BoardsAction.returnToTheMainPage}`;
-    returnToTheMainPage.classList.add('bg-warning', 'bg-gradient', 'fs-6')
+    returnToTheMainPage.classList.add('bg-warning', 'bg-gradient', 'fs-6');
+
+    const returnToSearch = document.createElement('a');
+    returnToSearch.textContent = BoardsAction.returnToSearch;
+    returnToSearch.setAttribute('data-board-action', BoardsAction.returnToSearch);
+    returnToSearch.classList.add('bg-warning', 'bg-gradient', 'fs-6');
+    boardDrop.append(returnToSearch);
 
     boardContainer.append(boardBtn, boardDrop);
     return boardContainer;
@@ -129,8 +135,6 @@ export function addSearchInfo(searchURL, amount) {
     const searchInfo = document.createElement('p');
     searchInfo.setAttribute('id', 'search-info');
     searchInfo.classList.add('search-info', 'container-sm', 'd-flex', 'justify-content-evenly');
-
-    console.log(searchURL);
 
     const searchQuery = searchURL.match(/(?<=per_page=28&query=)(.*)(?=)/g)[0];
 

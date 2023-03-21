@@ -40,6 +40,7 @@ export const BoardsAction = {
 	deleteBoard: 'deleteBoard',
 	cleanBoardsCards: 'clean Boards cards',
 	returnToTheMainPage: 'Return to main',
+	returnToSearch: 'Return to search',
 	cleanBoard: 'Clean a bord',
 };
 

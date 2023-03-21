@@ -102,6 +102,9 @@ export class CardController {
             case BoardsAction.cleanBoard:
                 this.cleanBoard(payload);
                 break;
+            case BoardsAction.returnToSearch:
+                this.returnToSearch();
+                break;
         }
     }
 
@@ -128,6 +131,11 @@ export class CardController {
         this.view.renderCards(this.model.getCards());
         this.view.removeBoardsInfo();
         removeSearchElements();
+    }
+
+    returnToSearch = () => {
+        this.view.removeBoardsInfo();
+        this.getSearch(this.model.getCurrentSearchPage());
     }
 
     cleanAllBoards = () => {
