@@ -140,6 +140,8 @@ export function addSearchInfo(searchURL, amount) {
 }
 
 export function removeSearchElements() {
-    document.getElementById('btn-container').remove();
-    document.getElementById('search-info').remove();
+    if(document.getElementById('btn-container')) {
+        document.getElementById('btn-container').remove();
+        document.getElementById('search-info').remove();
+    }
 }

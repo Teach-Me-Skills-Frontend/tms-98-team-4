@@ -153,6 +153,7 @@ export class CardController {
     returnMain = () => {
         this.view.renderCards(this.model.getCards());
         this.view.removeBoardsInfo();
+        removeSearchElements();
     }
 
     cleanAllBoards = () => {
@@ -182,9 +183,7 @@ export class CardController {
     loadBoard = (name) => {
         const numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
         if (this.model.getLocal().find(element => element.nameBoard === name)) {
-            if ((document.getElementById('btn-container'))) {
-                removeSearchElements();
-            }
+            removeSearchElements();
             this.view.renderCards(this.model.getLocal().filter(element => element.nameBoard === name));
             this.view.removeBoardsInfo();
             this.view.renderBoardInfo(name, numberCards)
@@ -278,9 +277,7 @@ export class CardController {
                 data => {
                     this.model.setCards(data);
                     this.view.renderCards(this.model.getCards());
-                    if ((document.getElementById('btn-container'))) {
-                        removeSearchElements();
-                    }
+                    removeSearchElements();
                 })
     }
 }
