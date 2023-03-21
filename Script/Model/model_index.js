@@ -102,13 +102,24 @@ export class CardModel {
         }
     }
 
-    deleteCard = (id) => {
-        const filter = this.cardStorage.filter((value) => value.id === id);
-        for (let i = 0; i < filter.length; i += 1) {
-            const cardIndex = this.cardStorage.findIndex((value) => value.id === id);
-            if (cardIndex > -1) {
-                this.cardStorage.splice(cardIndex, 1);
-                localStorage.setItem(LocalStorageKey.boards, JSON.stringify(this.cardStorage));
+    deleteCard = (id, nameBoard) => {
+        if (nameBoard) {
+            const filter = this.cardStorage.filter((value) => value.id === id && value.nameBoard === nameBoard);
+            for (let i = 0; i < filter.length; i += 1) {
+                const cardIndex = this.cardStorage.findIndex((value) => value.id === id);
+                if (cardIndex > -1) {
+                    this.cardStorage.splice(cardIndex, 1);
+                    localStorage.setItem(LocalStorageKey.boards, JSON.stringify(this.cardStorage));
+                }
+            }
+        } else {
+            const filter = this.cardStorage.filter((value) => value.id === id);
+            for (let i = 0; i < filter.length; i += 1) {
+                const cardIndex = this.cardStorage.findIndex((value) => value.id === id);
+                if (cardIndex > -1) {
+                    this.cardStorage.splice(cardIndex, 1);
+                    localStorage.setItem(LocalStorageKey.boards, JSON.stringify(this.cardStorage));
+                }
             }
         }
     }

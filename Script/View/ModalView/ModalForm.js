@@ -27,12 +27,15 @@ export class ModalForm {
             children[i].setAttribute('name', `${cardId}`)
         }
         card.append(this.cardModal);
-        const btn = document.getElementById(`${ModalAction.deleteCard}`);
-        if (this.model.getLocal().find(element => element.id !== cardId) === undefined) {
-            btn.setAttribute('disabled', 'disabled')
-        } if (this.model.getLocal().find(element => element.id === cardId)
-            && btn.hasAttribute('disabled')) { btn.removeAttribute('disabled'); }
         this.closeModal();
+        const btn = document.getElementById(`${ModalAction.deleteCard}`);
+        if (!document.getElementById('board-info')) {
+            btn.style.display = 'none';
+        } else {
+            if (this.model.getLocal().find(element => element.id === cardId)) {
+                btn.style.display = 'block';
+            }
+        }
     }
 
     closeModal = () => {

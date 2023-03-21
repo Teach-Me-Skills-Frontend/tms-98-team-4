@@ -133,28 +133,23 @@ export class CardController {
 
 
     deleteCard = (id) => {
-        this.model.deleteCard(id)
         this.renderCountCardstart(boardNames);
-        const btn = document.getElementById(ModalAction.deleteCard);
-        btn.setAttribute('disabled', 'disabled');
         for (let key of boardNames) {
-            console.log(this.model.getLocal());
-            const deletedCards = this.model.getLocal().filter(element => element.nameBoard === key);
-            console.log(deletedCards);
-            const number = deletedCards.length;
-            for (let i = 0; i <= number; i += 1) {
+            for (let i = 0; i <= boardNames.length; i += 1) {
                 if (document.getElementById('board-info').getAttribute('name') === key) {
-                    console.log(document.getElementById('board-info').getAttribute('name') === key);
+                    const deletedCards = this.model.cardStorage.filter(element => element.nameBoard === key && element.id === id);
+                    const number = deletedCards.length;
+                    this.model.deleteCard(id, key);
                     this.view.removeBoardsInfo();
                     this.view.renderBoardInfo(key, number);
-                    this.model.getLocal()
+                    this.renderCountCardItem(key);
                 }
             }
         }
-
         const card = document.getElementById(`${id}`);
         card.remove();
     }
+
 
     returnMain = () => {
         this.view.renderCards(this.model.getCards());
@@ -254,7 +249,6 @@ export class CardController {
 
     addComplaint = (name, id) => {
         if ([...document.getElementsByClassName('form-check-input')].find(item => { return item.checked })) {
-            console.log('hello comlaint')
             if (this.model.getLocalForbidden() === null) {
                 this.model.saveLocalForbidden(name, id);
             } else if ((this.model.getLocalForbidden().find(element => element.nameBoard === name && element.id === id))) {

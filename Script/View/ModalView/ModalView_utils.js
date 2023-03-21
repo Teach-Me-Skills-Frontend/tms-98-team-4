@@ -18,7 +18,6 @@ export function createCardModal() {
     btnBaseModalDelte.classList.add('btn-danger', 'button-modal');
     btnBaseModalDelte.setAttribute('data-modal-action', `${ModalAction.deleteCard}`);
     btnBaseModalDelte.classList.add('btn-danger', 'button-modal');
-    btnBaseModalDelte.setAttribute('disabled', 'disabled');
     btnBaseModalDelte.setAttribute('id', `${ModalAction.deleteCard}`);
 
     cardModal.append(btnBaseModalAddBoard, btnBaseModalComplain, btnBaseModalDelte);
