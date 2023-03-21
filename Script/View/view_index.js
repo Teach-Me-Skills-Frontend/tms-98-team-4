@@ -51,4 +51,8 @@ export class View {
 		card.append(this.cardModal);
 	}
 
+	openComplainAlert = (cardId) => {
+		const card = document.getElementById(cardId);
+		card.append(this.cardModal);
+	}
 }

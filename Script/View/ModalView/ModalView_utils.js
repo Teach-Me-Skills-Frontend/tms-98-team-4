@@ -32,3 +32,21 @@ export function createdalAlert() {
 
     return cardModal;
 }
+
+export function complainAlert() {
+    const cardModal = document.createElement('div');
+    cardModal.classList.add('card-modal', 'alert-modal');
+    cardModal.setAttribute('id', `${ModalAction.alertComplain}`)
+    cardModal.textContent = 'choose a cause of your complaint';
+
+    return cardModal;
+}
+
+export function successAddAlert() {
+    const cardModal = document.createElement('div');
+    cardModal.classList.add('card-modal', 'alert-modal');
+    cardModal.setAttribute('id', `${ModalAction.successAddAlert}`)
+    cardModal.textContent = 'successfully added this card';
+
+    return cardModal;
+}

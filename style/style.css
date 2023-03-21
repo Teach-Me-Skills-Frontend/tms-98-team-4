@@ -41,9 +41,11 @@ body{
   font-size: 2rem;  
 }
 
-#alert-added{
+#alert-added, #alert-complaint, #successAddAlert{
   color: #ffc107;
   font-size: 2rem;  
+  text-align: center;
+  padding: 5px;
 }
 
 .btn-lg{

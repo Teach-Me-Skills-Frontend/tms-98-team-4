@@ -1,6 +1,6 @@
 import { ModalAction } from '../view_constants.js';
 import { ComplainModal } from '../ModalView/ModalAddBan/ModalComplain.js';
-import { createCardModal, createdalAlert } from '../ModalView/ModalView_utils.js';
+import { createCardModal, createdalAlert, complainAlert, successAddAlert } from '../ModalView/ModalView_utils.js';
 import { BoardModal } from './ModalAddCard/ModalAddCard.js';
 import { CardModel } from '../../Model/model_index.js';
 
@@ -45,11 +45,28 @@ export class ModalForm {
     }
 
     openModalAlert = (cardId) => {
-        console.log('hello')
         const card = document.getElementById(cardId);
         card.append(createdalAlert());
         function closeModalAlert() {
             document.getElementById(`${ModalAction.alert}`).remove();
+        }
+        setTimeout(closeModalAlert, 2000);
+    }
+
+    openAddedAlert = (cardId) => {
+        const card = document.getElementById(cardId);
+        card.append(successAddAlert());
+        function closeModalAlert() {
+            document.getElementById(`${ModalAction.successAddAlert}`).remove();
+        }
+        setTimeout(closeModalAlert, 1500);
+    }
+
+    openComplainAlert = (cardId) => {
+        const card = document.getElementById(cardId);
+        card.append(complainAlert());
+        function closeModalAlert() {
+            document.getElementById(`${ModalAction.alertComplain}`).remove();
         }
         setTimeout(closeModalAlert, 2000);
     }
@@ -82,7 +99,7 @@ export class ModalForm {
         if ([...document.getElementsByClassName('form-check-input')].find(item => { return item.checked })) {
             this.clearCheckBoxes();
             card.remove();
-        } else { alert('Choose a cause of your complaint') }
+        } else { this.openComplainAlert(cardId) }
     }
 
     openBoardModal = (cardId) => {

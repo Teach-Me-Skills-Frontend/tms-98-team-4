@@ -4,8 +4,8 @@ import { CardAction } from './basic_constants.js';
 import { ModalAction, boardNames, BoardsAction, HeaderAction } from './View/view_constants.js';
 import { ModalForm } from './View/ModalView/ModalForm.js';
 import { LocalStorageKey } from './Model/model_index.js';
-import { removeListeners, setPageURLs, setCurrPage } from './app_controller_utils.js';
-import { addSearchElements, removeSearchElements } from './View/view_utils.js';
+import { removeSearchElements } from './View/view_utils.js';
+
 
 export class CardController {
     constructor(containerId) {
@@ -16,34 +16,9 @@ export class CardController {
     }
 
     async getSearch(searchURL) {
-
-        removeListeners();
-        if (document.getElementById('search-info')) {
-            removeSearchElements();
-        }
-
-        const response = await fetch(searchURL);
-        let linkArr = [];
-        const pageURLs = {};
-
-        if (response.headers.get('link')) {
-            linkArr = response.headers.get('link').split(',');
-            setPageURLs(linkArr, pageURLs);
-        } else {
-            setPageURLs(linkArr, pageURLs);
-        }
-
-        const responseJSON = await response.json();
-
-        if (!document.getElementById('btn-container')) {
-            addSearchElements(searchURL, responseJSON.total);
-        }
-        setCurrPage(searchURL);
-
-        this.model.setCardsSearch(responseJSON.results);
+        await this.model.getSearch(searchURL);
         this.view.renderCards(this.model.getCardsSearch());
-        this.assignNextURL(pageURLs);
-
+        this.assignNextURL(this.model.pageURLs);
     }
 
     assignNextURL(pageURLs) {
@@ -52,10 +27,10 @@ export class CardController {
         for (const button of buttons) {
             const type = button.getAttribute('id').split('_')[1];
 
-            if (Object.keys(pageURLs).includes(type)) {
+            if (Object.keys(this.model.pageURLs).includes(type)) {
                 button.addEventListener('click', () => {
                     window.scrollTo({ top: 100, behavior: "smooth" });
-                    this.getSearch(pageURLs[type]);
+                    this.getSearch(this.model.pageURLs[type]);
                 })
             }
         }
@@ -128,6 +103,9 @@ export class CardController {
             case BoardsAction.cleanBoard:
                 this.cleanBoard(payload);
                 break;
+            case BoardsAction.returnToSearch:
+                this.returnToSearch();
+                break;
         }
     }
 
@@ -135,27 +113,29 @@ export class CardController {
     deleteCard = (id) => {
         this.renderCountCardstart(boardNames);
         for (let key of boardNames) {
-            for (let i = 0; i <= boardNames.length; i += 1) {
-                if (document.getElementById('board-info').getAttribute('name') === key) {
-                    const deletedCards = this.model.cardStorage.filter(element => element.nameBoard === key && element.id === id);
-                    const number = deletedCards.length;
-                    this.model.deleteCard(id, key);
-                    this.view.removeBoardsInfo();
-                    this.view.renderBoardInfo(key, number);
-                    this.renderCountCardItem(key);
-                }
+            if (document.getElementById('board-info').getAttribute('name') === key) {
+                this.model.deleteCard(id, key);
+                this.view.removeBoardsInfo();
+                console.log(this.model.cardStorage.filter(element => element.nameBoard === key).length);
+                this.view.renderBoardInfo(key, this.model.cardStorage.filter(element => element.nameBoard === key).length);
+                this.renderCountCardItem(key);
             }
         }
         const card = document.getElementById(`${id}`);
         card.remove();
-        if (number === 0) {
-            this.view.renderEmptyList();
-        }
     }
 
     returnMain = () => {
         this.view.renderCards(this.model.getCards());
         this.view.removeBoardsInfo();
+        removeSearchElements();
+    }
+
+    returnToSearch = () => {
+        if (this.model.linkArr.length !== 0) {
+            this.view.removeBoardsInfo();
+            this.getSearch(this.model.getCurrentSearchPage());
+        } else this.returnMain()
     }
 
     cleanAllBoards = () => {
@@ -183,12 +163,10 @@ export class CardController {
     }
 
     loadBoard = (name) => {
+        removeSearchElements();
         if (this.model.cardStorage.length > 0) {
             const numberCards = (this.model.cardStorage.filter(element => element.nameBoard === name)).length;
             if (this.model.cardStorage.find(element => element.nameBoard === name)) {
-                if ((document.getElementById('btn-container'))) {
-                    removeSearchElements();
-                }
                 this.view.renderCards(this.model.getLocal().filter(element => element.nameBoard === name));
                 this.view.removeBoardsInfo();
                 this.view.renderBoardInfo(name, numberCards)
@@ -196,14 +174,10 @@ export class CardController {
             this.view.removeBoardsInfo();
             this.view.renderBoardInfo(name, numberCards)
         } else {
-            if ((document.getElementById('btn-container'))) {
-                removeSearchElements();
-            }
             this.view.renderEmptyList();
             this.view.removeBoardsInfo(); this.view.renderBoardInfo(name, 0);
         }
     }
-
 
     openComplainModal = (id) => {
         this.modalForm.openComplainModal(id);
@@ -234,10 +208,12 @@ export class CardController {
     addCardBoard = (name, id) => {
         if (this.model.getLocal() === null) {
             this.model.saveLocal(name, id);
+            this.modalForm.openAddedAlert(id);
         } else if ((this.model.getLocal().find(element => element.nameBoard === name && element.id === id))) {
             this.modalForm.openModalAlert(id);
         } else if
             ((this.model.getLocal().find(element => element.nameBoard === name && element.id === id)) === undefined) {
+            this.modalForm.openAddedAlert(id);
             this.model.saveLocal(name, id);
         }
         this.renderCountCardItem(name);
@@ -289,9 +265,7 @@ export class CardController {
                 data => {
                     this.model.setCards(data);
                     this.view.renderCards(this.model.getCards());
-                    if ((document.getElementById('btn-container'))) {
-                        removeSearchElements();
-                    }
+                    removeSearchElements();
                 })
     }
 }
