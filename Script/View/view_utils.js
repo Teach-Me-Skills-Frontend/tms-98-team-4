@@ -166,6 +166,10 @@ window.onscroll = function () {
 
 export function errorPage(err) {
     const root = document.getElementById('root');
+    const footer = document.getElementById('footer');
+    const appCard = document.getElementById('app-card');
+    footer.remove();
+    appCard.remove();
     const errorPage = document.createElement('div');
     errorPage.classList.add('d-flex', 'justify-content-center', 'align-items-center', 'text-center', 'text-warning', 'error', 'bg-dark');
     if (err = `SyntaxError: Unexpected token 'R', "Rate Limit Exceeded" is not valid JSON`) {
@@ -173,8 +177,6 @@ export function errorPage(err) {
     } else {
         errorPage.textContent = err;
     };
-    const appCard = document.querySelector('.app-card');
-    appCard.remove()
     root.append(errorPage);
     return root;
 }

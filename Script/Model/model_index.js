@@ -59,7 +59,7 @@ export class CardModel {
     getSearchData(url) {
         return fetch(url)
             .then((response) => response.json())
-            .catch(err => alert(err))
+            .catch(err => errorPage(err))
     }
 
     setCards(cards) {

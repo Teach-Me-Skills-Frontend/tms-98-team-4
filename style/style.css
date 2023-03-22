@@ -6,15 +6,14 @@ html{
 
 body{
   --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
-    padding-top: 1vw;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;    
 }
 
 .card {
    max-width: 23%;
    border-radius: 30px;
    min-width: 150px;
-   margin: 0.5vw;
+   margin-bottom: 30px;
    background-color: rgba(185, 177, 177, 0.096);
    position: relative;
 }
@@ -333,7 +332,7 @@ background-color: #fd7e14
 
 .search-info {
   font-size: 1.5rem;
-  padding-top: 80px;
+  padding-top: 120px;
   margin-bottom: -80px;
 }
 
@@ -405,5 +404,3 @@ background-color: #fd7e14
   display: flex;
   gap: 15px;
 }
-
-@import url(media.css);

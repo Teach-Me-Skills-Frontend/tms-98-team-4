@@ -13,7 +13,6 @@ export class ModalForm {
         this.model = new CardModel();
         this.clearBoardsModalFull = createClearBoardsModalFull();
         this.clearBoardsModalEmpty = createClearBoardsModalEmpty();
-
         this.cardModal.addEventListener('click', ({ target }) => {
             if (Object.values(ModalAction).includes(target.dataset.modalAction)) {
                 onModalAction(target.dataset.modalAction, target.name);
@@ -121,6 +120,26 @@ export class ModalForm {
 
     closeAddModal = () => {
         this.boardModal.modalBoardContainer.remove();
+    }
+
+    openClearBoardsModalFull = () => {
+        const header = document.getElementById('header');
+        header.after(this.clearBoardsModalFull);
+
+        document.addEventListener('mouseup', (event) => {
+            const withinBounderieas = event.composedPath().includes(this.clearBoardsModalFull);
+            if (!withinBounderieas) {
+                this.clearBoardsModalFull.remove();
+            }
+        })
+    }
+
+    openClearBoardsModalEmpty = () => {
+        const header = document.getElementById('header');
+        header.after(this.clearBoardsModalEmpty);
+        setTimeout(() => {
+            this.clearBoardsModalEmpty.remove();
+        }, '2000');
     }
 
     openClearBoardsModalFull = () => {

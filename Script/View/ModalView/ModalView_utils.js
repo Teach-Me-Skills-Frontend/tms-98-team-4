@@ -62,6 +62,7 @@ export function createClearBoardsModalEmpty() {
     return modalContainer;
 }
 
+
 export function createClearBoardsModalFull() {
     const modalContainer = document.createElement('div');
     modalContainer.classList.add('clear-boards-container', 'shadow-header');

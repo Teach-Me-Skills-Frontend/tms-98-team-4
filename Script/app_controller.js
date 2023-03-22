@@ -196,13 +196,11 @@ export class CardController {
     }
 
     cleanAllBoards = () => {
-
-        if (this.model.getLocal().length === 0) {
+        if (this.model.getLocal().length === 0 || this.model.cardStorage === null) {
             this.modalForm.openClearBoardsModalEmpty();
         }
         else {
             this.modalForm.openClearBoardsModalFull();
-
             document.getElementById('clear-boards-button-yes').addEventListener('click', () => {
                 this.model.refreshLocal();
                 this.modalForm.clearBoardsModalFull.remove();
@@ -211,14 +209,10 @@ export class CardController {
                 this.renderCountCardstart(boardNames);
                 this.view.removeBoardsInfo();
             })
-
             document.getElementById('clear-boards-button-no').addEventListener('click', () => {
                 this.modalForm.clearBoardsModalFull.remove();
             })
-
-
         }
-
     }
 
     cleanBoard = (name) => {
@@ -247,25 +241,6 @@ export class CardController {
             this.view.renderEmptyList();
             this.view.removeBoardsInfo(); this.view.renderBoardInfo(name, 0);
         }
-    }
-
-    cleanAllBoards = () => {
-        if (this.model.getLocal().length === 0) {
-            alert("nothing to delete")
-        }
-        else {
-            confirm("Are you sure?");
-            this.model.refreshLocal();
-        }
-        this.view.renderCards(this.model.getCards())
-        this.renderCountCardstart(boardNames);
-        this.view.removeBoardsInfo();
-    }
-
-    returnMain = () => {
-        this.view.renderCards(this.model.getCards());
-        this.view.removeBoardsInfo();
-        removeSearchElements();
     }
 
     returnToSearch = () => {
