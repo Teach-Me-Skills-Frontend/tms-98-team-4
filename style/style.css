@@ -26,7 +26,15 @@ body{
 }
 
 #root {   
-   min-width: 320px;
+  min-width: 320px;
+  display: flex;
+  flex-flow: column;   
+  height: 100vh;
+}
+
+.p-3{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .input-gap{
@@ -277,6 +285,7 @@ header {
   max-width: 1400px;
   margin: 0 auto;  
   flex-grow: 1;
+  flex: 1;
 }
 
 #btn-container{
@@ -330,13 +339,13 @@ header {
 }
 
 #header {  
-  position: fixed;
-  top: 0;     
+  position: fixed;      
   margin: 1vw;
   width: 100%;
   transition: top 0.3s; 
   z-index: 100;
   max-width: 1400px;
+  left: 0;
 }
 
 #board-info{

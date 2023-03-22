@@ -4,14 +4,14 @@ import { Header } from "./Header/header.js";
 import { ComplainModal } from "./ModalView/ModalAddBan/ModalComplain.js";
 import { BoardModal } from "./ModalView/ModalAddCard/ModalAddCard.js";
 
-function createPinterestAppCard(header, cardList,footer) {
+function createPinterestAppCard(header, cardList) {
 	const appCard = document.createElement('div');
-	appCard.classList.add('app-card','d-flex','flex-column');
+	appCard.classList.add('app-card', 'd-flex', 'flex-column');
 	appCard.setAttribute('id', 'app-card');
-	const wrapper = document.createElement('div');
-	wrapper.classList.add('wrap');
-	wrapper.append(header, cardList);
-	appCard.append(wrapper, footer);
+	// const wrapper = document.createElement('div');
+	// wrapper.classList.add('wrap');
+	// wrapper.append(header, cardList);
+	appCard.append(header, cardList);
 	return appCard;
 }
 
@@ -25,8 +25,9 @@ export class View {
 		this.complainModal = new ComplainModal();
 		this.BoardModal = new BoardModal();
 		this.rootContainer = document.getElementById(containerId);
-		this.appCard = createPinterestAppCard(this.header.cardContainer, this.cardList.cardContainer,this.footer.footerContainer);
+		this.appCard = createPinterestAppCard(this.header.cardContainer, this.cardList.cardContainer);
 		this.rootContainer.append(this.appCard);
+		this.rootContainer.appendChild(this.footer.footerContainer);
 	}
 
 	renderCards = (cards) => {
