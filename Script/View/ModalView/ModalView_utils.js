@@ -50,3 +50,42 @@ export function successAddAlert() {
 
     return cardModal;
 }
+
+export function createClearBoardsModalEmpty() {
+    const modalContainer = document.createElement('div');
+    modalContainer.classList.add('clear-boards-container', 'shadow-header');
+    modalContainer.setAttribute('id', 'clear-boards-container');
+    modalContainer.textContent = 'All boards are empty';
+
+    return modalContainer;
+}
+
+export function createClearBoardsModalFull() {
+    const modalContainer = document.createElement('div');
+    modalContainer.classList.add('clear-boards-container', 'shadow-header');
+    modalContainer.setAttribute('id', 'clear-boards-container');
+    
+    const clearBoardsText = document.createElement('p');
+    clearBoardsText.classList.add('clear-boards-text');
+    clearBoardsText.setAttribute('id', 'clear-boards-text');
+    clearBoardsText.textContent = 'Are you sure?';
+
+    const clearBoardsBtnContainer = document.createElement('div');
+    clearBoardsBtnContainer.classList.add('clear-boards-btn-container');
+    clearBoardsBtnContainer.setAttribute('id', 'clear-boards-btn-container');
+
+    const clearBoardsBtnYes = document.createElement('button');
+    clearBoardsBtnYes.classList.add('btn', 'btn-success', 'button-clear');
+    clearBoardsBtnYes.setAttribute('id', 'clear-boards-button-yes');
+    clearBoardsBtnYes.textContent = 'Clear boards';
+
+    const clearBoardsBtnNo = document.createElement('button');
+    clearBoardsBtnNo.classList.add('btn', 'btn-danger', 'button-clear');
+    clearBoardsBtnNo.setAttribute('id', 'clear-boards-button-no');
+    clearBoardsBtnNo.textContent = 'Cancel';
+
+    clearBoardsBtnContainer.append(clearBoardsBtnYes, clearBoardsBtnNo);
+    modalContainer.append(clearBoardsText, clearBoardsBtnContainer);
+
+    return modalContainer;
+}

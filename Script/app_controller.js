@@ -140,16 +140,29 @@ export class CardController {
     }
 
     cleanAllBoards = () => {
+
         if (this.model.getLocal().length === 0) {
-            alert("nothing to delete")
+            this.modalForm.openClearBoardsModalEmpty();
         }
         else {
-            confirm("Are you sure?");
-            this.model.refreshLocal();
+            this.modalForm.openClearBoardsModalFull();
+
+            document.getElementById('clear-boards-button-yes').addEventListener('click', () => {
+                this.model.refreshLocal();
+                this.modalForm.clearBoardsModalFull.remove();
+                this.modalForm.openClearBoardsModalEmpty();
+                this.view.renderCards(this.model.getCards())
+                this.renderCountCardstart(boardNames);
+                this.view.removeBoardsInfo();
+            })
+
+            document.getElementById('clear-boards-button-no').addEventListener('click', () => {
+                this.modalForm.clearBoardsModalFull.remove();
+            })
+            
+            
         }
-        this.view.renderCards(this.model.getCards())
-        this.renderCountCardstart(boardNames);
-        this.view.removeBoardsInfo();
+        
     }
 
     cleanBoard = (name) => {
