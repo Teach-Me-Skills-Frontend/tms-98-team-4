@@ -276,6 +276,7 @@ header {
   padding-top: 2vw;
   max-width: 1400px;
   margin: 0 auto;  
+  flex-grow: 1;
 }
 
 #btn-container{
@@ -346,6 +347,22 @@ header {
 
 #card-container{
   margin-top: 80px;
+}
+
+.footer-img{
+  width: 50px;
+}
+.hr{
+  width: 100%;
+}
+.wrap{
+  flex-direction: column;
+  display: flex;
+  min-height: 70vh;
+}
+.error{
+  width: 100vw;
+  height: 100vh;
 }
 
 @import url(media.css);

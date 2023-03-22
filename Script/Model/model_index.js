@@ -1,6 +1,6 @@
 
 import { removeListeners, setPageURLs, setCurrPage } from '../app_controller_utils.js';
-import { addSearchElements, removeSearchElements } from '../View/view_utils.js';
+import { addSearchElements, removeSearchElements, errorPage } from '../View/view_utils.js';
 
 export const LocalStorageKey = {
     boards: 'boards',
@@ -54,7 +54,7 @@ export class CardModel {
         const url = `https://api.unsplash.com/photos?page=${number}&per_page=28&client_id=04ufwLfYkUW_uO9OlQOojuE9hQFxR0veEPagGYh0VGA`;
         return fetch(url)
             .then((response) => response.json())
-            .catch(err => alert(err))
+            .catch(err => errorPage(err))
     }
 
     getSearchData(url) {
