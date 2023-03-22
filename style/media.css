@@ -33,6 +33,11 @@
   #card-container{
     margin-top: 220px !important;
   }
+
+  .search-info {
+    padding-top: 160px !important;    
+    margin-bottom: -130px !important;
+  }
 }
 
 @media (max-width: 768px) {

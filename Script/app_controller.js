@@ -166,6 +166,72 @@ export class CardController {
         }
     }
 
+
+    deleteCard = (id) => {
+        this.renderCountCardstart(boardNames);
+        for (let key of boardNames) {
+            if (document.getElementById('board-info').getAttribute('name') === key) {
+                this.model.deleteCard(id, key);
+                this.view.removeBoardsInfo();
+                console.log(this.model.cardStorage.filter(element => element.nameBoard === key).length);
+                this.view.renderBoardInfo(key, this.model.cardStorage.filter(element => element.nameBoard === key).length);
+                this.renderCountCardItem(key);
+            }
+        }
+        const card = document.getElementById(`${id}`);
+        card.remove();
+    }
+
+    returnMain = () => {
+        this.view.renderCards(this.model.getCards());
+        this.view.removeBoardsInfo();
+        removeSearchElements();
+    }
+
+    returnToSearch = () => {
+        if (this.model.linkArr.length !== 0) {
+            this.view.removeBoardsInfo();
+            this.getSearch(this.model.getCurrentSearchPage());
+        } else this.returnMain()
+    }
+
+    cleanAllBoards = () => {
+
+        if (this.model.getLocal().length === 0) {
+            this.modalForm.openClearBoardsModalEmpty();
+        }
+        else {
+            this.modalForm.openClearBoardsModalFull();
+
+            document.getElementById('clear-boards-button-yes').addEventListener('click', () => {
+                this.model.refreshLocal();
+                this.modalForm.clearBoardsModalFull.remove();
+                this.modalForm.openClearBoardsModalEmpty();
+                this.view.renderCards(this.model.getCards())
+                this.renderCountCardstart(boardNames);
+                this.view.removeBoardsInfo();
+            })
+
+            document.getElementById('clear-boards-button-no').addEventListener('click', () => {
+                this.modalForm.clearBoardsModalFull.remove();
+            })
+
+
+        }
+
+    }
+
+    cleanBoard = (name) => {
+        this.model.cleanBoard(name);
+        this.renderCountCardItem(name);
+        const numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
+        this.view.removeBoardsInfo();
+        this.view.renderBoardInfo(name, numberCards)
+        if (numberCards === 0) {
+            this.view.renderEmptyList()
+        }
+    }
+
     loadBoard = (name) => {
         removeSearchElements();
         if (this.model.cardStorage.length > 0) {

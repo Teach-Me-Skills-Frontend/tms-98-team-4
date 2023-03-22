@@ -1,6 +1,6 @@
 import { ModalAction, AddBtnNames, GropuInfoBoxes } from '../view_constants.js';
 import { ComplainModal } from '../ModalView/ModalAddBan/ModalComplain.js';
-import { createCardModal, createdalAlert, complainAlert, successAddAlert } from '../ModalView/ModalView_utils.js';
+import { createCardModal, createdalAlert, complainAlert, successAddAlert, createClearBoardsModalEmpty, createClearBoardsModalFull } from '../ModalView/ModalView_utils.js';
 import { BoardModal } from './ModalAddCard/ModalAddCard.js';
 import { CardModel } from '../../Model/model_index.js';
 
@@ -11,6 +11,9 @@ export class ModalForm {
         this.boardModal = new BoardModal(onModalAction)
         this.cardModal = createCardModal();
         this.model = new CardModel();
+        this.clearBoardsModalFull = createClearBoardsModalFull();
+        this.clearBoardsModalEmpty = createClearBoardsModalEmpty();
+
         this.cardModal.addEventListener('click', ({ target }) => {
             if (Object.values(ModalAction).includes(target.dataset.modalAction)) {
                 onModalAction(target.dataset.modalAction, target.name);
@@ -118,5 +121,25 @@ export class ModalForm {
 
     closeAddModal = () => {
         this.boardModal.modalBoardContainer.remove();
+    }
+
+    openClearBoardsModalFull = () => {
+        const header = document.getElementById('header');
+        header.after(this.clearBoardsModalFull);
+
+        document.addEventListener('mouseup', (event) => {
+            const withinBounderieas = event.composedPath().includes(this.clearBoardsModalFull);
+            if (!withinBounderieas) {
+                this.clearBoardsModalFull.remove();
+            }
+        })
+    }
+
+    openClearBoardsModalEmpty = () => {
+        const header = document.getElementById('header');
+        header.after(this.clearBoardsModalEmpty);
+        setTimeout(() => {
+            this.clearBoardsModalEmpty.remove();
+        }, '3000');
     }
 }
