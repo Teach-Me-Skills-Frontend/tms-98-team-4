@@ -1,5 +1,3 @@
-import { createCardModal } from '../ModalView/ModalView_utils.js'
-
 function createCardButton(id) {
    const cardButton = document.createElement('button');
    cardButton.classList.add('card-button');

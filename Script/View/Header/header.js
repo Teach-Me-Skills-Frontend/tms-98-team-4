@@ -15,13 +15,6 @@ export class Header {
         })
     }
 
-    randomNumberReboot() {
-        return Math.floor(Math.random() * 334);
-    }
-
-    randomNumberSearch() {
-        return Math.floor(Math.random() * 100);
-    }
     onFormSubmit = (event) => {
         event.preventDefault();
         const { value } = this.cardContainer.children[1].firstChild;
@@ -44,7 +37,6 @@ export class Header {
             case HeaderAction.openDropBoard:
                 const boardsList = document.getElementById('dropDownList');
                 boardsList.classList.toggle('show');
-                //close dropdown by any other click on display
                 document.addEventListener('click', (event) => {
                     const boardsBtn = document.getElementById('dropDownBtn');
                     const withinBounderieas = event.composedPath().includes(boardsBtn);
@@ -68,5 +60,3 @@ export class Header {
         }
     }
 }
-
-

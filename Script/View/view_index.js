@@ -52,14 +52,4 @@ export class View {
 	renderEmptyList() {
 		this.cardList.renderEmptyList();
 	}
-
-	openModalAlert = (cardId) => {
-		const card = document.getElementById(cardId);
-		card.append(this.cardModal);
-	}
-
-	openComplainAlert = (cardId) => {
-		const card = document.getElementById(cardId);
-		card.append(this.cardModal);
-	}
 }

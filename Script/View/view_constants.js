@@ -1,16 +1,15 @@
 export const AddBtnNames = {
 	sendComplain: "send",
 	cancelComplain: "cancel",
-	addPin: "add on Board",
 	label: "Pinterest",
 	pickBoard: 'Boards',
 	deleteAllboards: 'clean all boards',
-	cleanboard: 'clean '
+	cleanboard: 'clean ',
+	groupBtnsAdd: 'addBtns',
+	groupBtnsComplain: 'complainBtns'
 };
 
-export const boardNames = ['Board 1', 'Board 2', 'Board 3'];
-
-export const labelName = 'Pinterest';
+export const boardNames = ['Board <favorite>', 'Board <basic>', 'Board <others>'];
 
 export const HeaderAction = {
 	search: 'search',
@@ -31,12 +30,6 @@ export const ModalAction = {
 	successAddAlert: 'successAddAlert'
 };
 
-export const cardBoardAction = {
-	board1: 'Board 1',
-
-};
-
-
 export const BoardsAction = {
 	loadBoard: 'loadBoard',
 	deleteBoard: 'deleteBoard',
@@ -46,7 +39,13 @@ export const BoardsAction = {
 	cleanBoard: 'Clean a bord',
 };
 
-export const ModalsID = {
-	complainModal: 'complain',
-	boardsModal: 'boardsModal',
-};
+export const GropuInfoBoxes = {
+	searchInfo: 'search-info',
+	boardInfo: 'board-info'
+}
+
+export const AlertDiscription = {
+	successAddAlert: 'successfully added this card',
+	complainAlert: 'choose a cause of your complaint',
+	createdalAlert: 'Already added'
+}

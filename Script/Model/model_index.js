@@ -1,4 +1,3 @@
-
 import { removeListeners, setPageURLs, setCurrPage } from '../app_controller_utils.js';
 import { addSearchElements, removeSearchElements, errorPage } from '../View/view_utils.js';
 

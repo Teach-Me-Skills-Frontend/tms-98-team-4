@@ -29,7 +29,4 @@ export function createComplainModal() {
     complainModal.append(modalDescription, checkBoxes, containerComplainBtns);
 
     return complainModal;
-
 }
-
-

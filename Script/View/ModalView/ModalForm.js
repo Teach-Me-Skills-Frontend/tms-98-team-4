@@ -1,4 +1,4 @@
-import { ModalAction } from '../view_constants.js';
+import { ModalAction, AddBtnNames, GropuInfoBoxes } from '../view_constants.js';
 import { ComplainModal } from '../ModalView/ModalAddBan/ModalComplain.js';
 import { createCardModal, createdalAlert, complainAlert, successAddAlert } from '../ModalView/ModalView_utils.js';
 import { BoardModal } from './ModalAddCard/ModalAddCard.js';
@@ -29,9 +29,12 @@ export class ModalForm {
         card.append(this.cardModal);
         this.closeModal();
         const btn = document.getElementById(`${ModalAction.deleteCard}`);
-        if (!document.getElementById('board-info')) {
+        const btnComplain = document.getElementById(`bt-${ModalAction.complain}`)
+        if (!document.getElementById(`${GropuInfoBoxes.boardInfo}`)) {
             btn.style.display = 'none';
+            btnComplain.style.display = 'block';
         } else {
+            btnComplain.style.display = 'none';
             if (this.model.getLocal().find(element => element.id === cardId)) {
                 btn.style.display = 'block';
             }
@@ -50,7 +53,7 @@ export class ModalForm {
         function closeModalAlert() {
             document.getElementById(`${ModalAction.alert}`).remove();
         }
-        setTimeout(closeModalAlert, 2000);
+        setTimeout(closeModalAlert, 1000);
     }
 
     openAddedAlert = (cardId) => {
@@ -59,7 +62,7 @@ export class ModalForm {
         function closeModalAlert() {
             document.getElementById(`${ModalAction.successAddAlert}`).remove();
         }
-        setTimeout(closeModalAlert, 1500);
+        setTimeout(closeModalAlert, 1000);
     }
 
     openComplainAlert = (cardId) => {
@@ -68,7 +71,7 @@ export class ModalForm {
         function closeModalAlert() {
             document.getElementById(`${ModalAction.alertComplain}`).remove();
         }
-        setTimeout(closeModalAlert, 2000);
+        setTimeout(closeModalAlert, 1000);
     }
 
     clearCheckBoxes = () => {
@@ -83,7 +86,7 @@ export class ModalForm {
         this.cardModal.remove();
         const card = document.getElementById(cardId);
         card.append(this.modalComplain.modalComplainContainer);
-        const btns = document.getElementById('complainBtns');
+        const btns = document.getElementById(`${AddBtnNames.groupBtnsComplain}`);
         const children = btns.childNodes;
         for (let i = 0; i < children.length; i += 1) {
             children[i].setAttribute('name', `${cardId}`)
@@ -99,14 +102,14 @@ export class ModalForm {
         if ([...document.getElementsByClassName('form-check-input')].find(item => { return item.checked })) {
             this.clearCheckBoxes();
             card.remove();
-        } else { this.openComplainAlert(cardId) }
+        } else { this.openComplainAlert(cardId) };
     }
 
     openBoardModal = (cardId) => {
         this.cardModal.remove();
         const card = document.getElementById(cardId);
         card.append(this.boardModal.modalBoardContainer);
-        const btns = document.getElementById('addBtns');
+        const btns = document.getElementById(`${AddBtnNames.groupBtnsAdd}`);
         const children = btns.childNodes;
         for (let i = 0; i < children.length; i += 1) {
             children[i].setAttribute('name', `${cardId}`)

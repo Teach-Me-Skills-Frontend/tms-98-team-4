@@ -16,7 +16,7 @@
   }
 
   #board-info{
-    padding-top: 160px !important;    
+    padding-top: 220px !important;    
     margin-bottom: -130px !important;
   }
   .card{
@@ -31,16 +31,16 @@
   }
   
   #card-container{
-    margin-top: 160px !important;
+    margin-top: 220px !important;
   }
 }
 
 @media (max-width: 768px) {
-  .d-flex {
+  /* .d-flex {
     justify-content: center !important;
     flex-wrap: wrap;
     gap: 10px;
-  }
+  } */
   .form {    
     width: 70% !important;
   }

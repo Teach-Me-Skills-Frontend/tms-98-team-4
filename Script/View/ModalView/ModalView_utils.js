@@ -1,4 +1,4 @@
-import { ModalAction } from '../view_constants.js';
+import { ModalAction, AlertDiscription } from '../view_constants.js';
 import { createBtn } from '../view_utils.js';
 
 export function createCardModal() {
@@ -13,6 +13,8 @@ export function createCardModal() {
     const btnBaseModalComplain = createBtn(ModalAction.complain);
     btnBaseModalComplain.classList.add('btn-warning', 'button-modal');
     btnBaseModalComplain.setAttribute('data-modal-action', `${ModalAction.complain}`);
+    btnBaseModalComplain.setAttribute('id', `bt-${ModalAction.complain}`);
+
 
     const btnBaseModalDelte = createBtn(ModalAction.deleteCard);
     btnBaseModalDelte.classList.add('btn-danger', 'button-modal');
@@ -28,7 +30,7 @@ export function createdalAlert() {
     const cardModal = document.createElement('div');
     cardModal.classList.add('card-modal', 'alert-modal');
     cardModal.setAttribute('id', `${ModalAction.alert}`)
-    cardModal.textContent = 'Already added';
+    cardModal.textContent = `${AlertDiscription.createdalAlert}`;
 
     return cardModal;
 }
@@ -37,7 +39,7 @@ export function complainAlert() {
     const cardModal = document.createElement('div');
     cardModal.classList.add('card-modal', 'alert-modal');
     cardModal.setAttribute('id', `${ModalAction.alertComplain}`)
-    cardModal.textContent = 'choose a cause of your complaint';
+    cardModal.textContent = `${AlertDiscription.complainAlert}`;
 
     return cardModal;
 }
@@ -46,7 +48,7 @@ export function successAddAlert() {
     const cardModal = document.createElement('div');
     cardModal.classList.add('card-modal', 'alert-modal');
     cardModal.setAttribute('id', `${ModalAction.successAddAlert}`)
-    cardModal.textContent = 'successfully added this card';
+    cardModal.textContent = `${AlertDiscription.successAddAlert}`;
 
     return cardModal;
 }

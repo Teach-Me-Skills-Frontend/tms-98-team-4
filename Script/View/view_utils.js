@@ -1,5 +1,5 @@
-import { AddBtnNames, boardNames, HeaderAction, BoardsAction } from './view_constants.js';
-import { causesComplains } from '../View/ModalView/ModalAddBan/ModalAddBan_constants.js';
+import { AddBtnNames, boardNames, HeaderAction, BoardsAction, GropuInfoBoxes } from './view_constants.js';
+import { CausesComplains } from '../View/ModalView/ModalAddBan/ModalAddBan_constants.js';
 
 export function createBtn(title, buttonProps) {
     const button = document.createElement('button');
@@ -57,7 +57,7 @@ export function createBoard() {
     const boardItemDelete = document.createElement('a');
     boardItemDelete.textContent = AddBtnNames.deleteAllboards;
     boardItemDelete.setAttribute('data-board-action', BoardsAction.cleanBoardsCards);
-    boardItemDelete.classList.add('bg-light');
+    boardItemDelete.classList.add('bg-danger', 'text-light');
     boardDrop.append(boardItemDelete)
 
     const returnToTheMainPage = document.createElement('a');
@@ -81,7 +81,7 @@ export function createBoard() {
 export function createCheckBoxesСomplain(causes) {
     const checkBoxContainerBasic = document.createElement('div');
     checkBoxContainerBasic.setAttribute('id', 'check-boxes')
-    for (const key in causesComplains) {
+    for (const key in CausesComplains) {
         const checkBoxContainer = document.createElement('div');
         checkBoxContainer.classList.add('form-check', 'check-gap');
         checkBoxContainer.setAttribute('id', 'modalComplainCheckBox');
@@ -93,7 +93,7 @@ export function createCheckBoxesСomplain(causes) {
         const checkBoxLabel = document.createElement('label');
         checkBoxLabel.classList.add('form-check-label');
 
-        checkBoxLabel.textContent = causesComplains[key];
+        checkBoxLabel.textContent = CausesComplains[key];
         checkBoxLabel.append(checkBoxinput)
         checkBoxContainer.append(checkBoxLabel)
 
@@ -135,7 +135,7 @@ export function addSearchElements(searchURL, amount) {
 
 export function addSearchInfo(searchURL, amount) {
     const searchInfo = document.createElement('p');
-    searchInfo.setAttribute('id', 'search-info');
+    searchInfo.setAttribute('id', `${GropuInfoBoxes.searchInfo}`);
     searchInfo.classList.add('search-info', 'container-sm', 'd-flex', 'justify-content-evenly');
 
     console.log(searchURL);
@@ -162,16 +162,16 @@ window.onscroll = function () {
         document.getElementById("header").style.top = "-200px";
     }
     prevScrollpos = currentScrollPos;
-} 
+}
 
-export function errorPage(err){
+export function errorPage(err) {
     const root = document.getElementById('root');
     const errorPage = document.createElement('div');
-    errorPage.classList.add('d-flex','justify-content-center','align-items-center','text-center','text-warning','error','bg-dark');
-    if(err = `SyntaxError: Unexpected token 'R', "Rate Limit Exceeded" is not valid JSON`){
-    errorPage.textContent = 'Rate Limit Exceeded. Try again later';
+    errorPage.classList.add('d-flex', 'justify-content-center', 'align-items-center', 'text-center', 'text-warning', 'error', 'bg-dark');
+    if (err = `SyntaxError: Unexpected token 'R', "Rate Limit Exceeded" is not valid JSON`) {
+        errorPage.textContent = 'Rate Limit Exceeded. Try again later';
     } else {
-    errorPage.textContent = err;
+        errorPage.textContent = err;
     };
     const appCard = document.querySelector('.app-card');
     appCard.remove()

@@ -13,15 +13,28 @@ export class CardController {
         this.view = new View({ containerId, onHeaderAction: this.onHeaderAction, onCardAction: this.onCardAction, onBoardAction: this.onBoardAction });
         this.modalForm = new ModalForm(this.onModalAction);
         this.render = this.renderCountCardstart(boardNames);
+        this.starter = this.initialize();
     }
 
-    async getSearch(searchURL) {
-        await this.model.getSearch(searchURL);
-        this.view.renderCards(this.model.getCardsSearch());
-        this.assignNextURL(this.model.pageURLs);
+    onHeaderAction = (action, payload = undefined) => {
+        switch (action) {
+            case HeaderAction.search:
+                this.getSearch(payload);
+                break;
+            case HeaderAction.reload:
+                this.reload();
+                break;
+        }
     }
 
-    assignNextURL(pageURLs) {
+    reload() {
+        if (document.getElementById('board-info')) {
+            this.view.removeBoardsInfo();
+        }
+        this.initialize();
+    }
+
+    assignNextURL() {
         const buttons = Array.from(document.querySelectorAll('[id*=button_]'))
 
         for (const button of buttons) {
@@ -36,19 +49,10 @@ export class CardController {
         }
     }
 
-    getReboot() {
-        this.initialize()
-    }
-
-    onHeaderAction = (action, payload = undefined) => {
-        switch (action) {
-            case HeaderAction.search:
-                this.getSearch(payload);
-                break;
-            case HeaderAction.reload:
-                this.getReboot();
-                break;
-        }
+    async getSearch(searchURL) {
+        await this.model.getSearch(searchURL);
+        this.view.renderCards(this.model.getCardsSearch());
+        this.assignNextURL(this.model.pageURLs);
     }
 
     onModalAction = (action, payload = undefined, id = undefined) => {
@@ -79,6 +83,36 @@ export class CardController {
         }
     }
 
+    openComplainModal = (id) => {
+        this.modalForm.openComplainModal(id);
+    }
+
+    closeComplainModal = (id) => {
+        this.modalForm.openModal(id);
+        this.modalForm.closeComplainModal();
+    }
+
+    addComplaint = (name, id) => {
+        if ([...document.getElementsByClassName('form-check-input')].find(item => { return item.checked })) {
+            if (this.model.getLocalForbidden() === null) {
+                this.model.saveLocalForbidden(name, id);
+            } if ((this.model.getLocalForbidden().find(element => element.nameBoard === name && element.id === id))) {
+                alert('complaint already added')
+            } if
+                ((this.model.getLocalForbidden().find(element => element.nameBoard === name && element.id === id)) === undefined) {
+                this.model.saveLocalForbidden(name, id);
+            }
+        }
+    }
+
+    sendComplain = (id) => {
+        this.modalForm.sendComplain(id);
+        this.checkCardOnBoard(id);
+        for (let key of boardNames) {
+            this.model.deleteCard(id, key);
+        }
+        this.renderCountCardstart(boardNames);
+    }
 
     openBoardModal = (id) => {
         this.modalForm.openBoardModal(id)
@@ -88,6 +122,28 @@ export class CardController {
         this.modalForm.closeAddModal();
         this.modalForm.openModal(id);
 
+    }
+
+    addCardBoard = (name, id) => {
+        if (this.model.getLocal() === null) {
+            this.model.saveLocal(name, id);
+            this.modalForm.openAddedAlert(id);
+        } else if ((this.model.getLocal().find(element => element.nameBoard === name && element.id === id))) {
+            this.modalForm.openModalAlert(id);
+        } else if
+            ((this.model.getLocal().find(element => element.nameBoard === name && element.id === id)) === undefined) {
+            this.modalForm.openAddedAlert(id);
+            this.model.saveLocal(name, id);
+        }
+        this.renderCountCardItem(name);
+        this.modalForm.closeModalBoard();
+    }
+
+    deleteCard = (id) => {
+        this.renderCountCardstart(boardNames);
+        this.checkCardOnBoard(id);
+        const card = document.getElementById(`${id}`);
+        card.remove();
     }
 
     onBoardAction = (action, payload = undefined) => {
@@ -110,59 +166,6 @@ export class CardController {
         }
     }
 
-
-    deleteCard = (id) => {
-        this.renderCountCardstart(boardNames);
-        for (let key of boardNames) {
-            if (document.getElementById('board-info').getAttribute('name') === key) {
-                this.model.deleteCard(id, key);
-                this.view.removeBoardsInfo();
-                console.log(this.model.cardStorage.filter(element => element.nameBoard === key).length);
-                this.view.renderBoardInfo(key, this.model.cardStorage.filter(element => element.nameBoard === key).length);
-                this.renderCountCardItem(key);
-            }
-        }
-        const card = document.getElementById(`${id}`);
-        card.remove();
-    }
-
-    returnMain = () => {
-        this.view.renderCards(this.model.getCards());
-        this.view.removeBoardsInfo();
-        removeSearchElements();
-    }
-
-    returnToSearch = () => {
-        if (this.model.linkArr.length !== 0) {
-            this.view.removeBoardsInfo();
-            this.getSearch(this.model.getCurrentSearchPage());
-        } else this.returnMain()
-    }
-
-    cleanAllBoards = () => {
-        if (this.model.getLocal().length === 0) {
-            alert("nothing to delete")
-        }
-        else {
-            confirm("Are you sure?");
-            this.model.refreshLocal();
-        }
-        this.view.renderCards(this.model.getCards())
-        this.renderCountCardstart(boardNames);
-        this.view.removeBoardsInfo();
-    }
-
-    cleanBoard = (name) => {
-        this.model.cleanBoard(name);
-        this.renderCountCardItem(name);
-        const numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
-        this.view.removeBoardsInfo();
-        this.view.renderBoardInfo(name, numberCards)
-        if (numberCards === 0) {
-            this.view.renderEmptyList()
-        }
-    }
-
     loadBoard = (name) => {
         removeSearchElements();
         if (this.model.cardStorage.length > 0) {
@@ -180,45 +183,52 @@ export class CardController {
         }
     }
 
-    openComplainModal = (id) => {
-        this.modalForm.openComplainModal(id);
-    }
-
-
-    openPhoto = (src) => {
-        this.view.openPhoto(src);
-    }
-
-    openModal = (id) => {
-        this.modalForm.openModal(id);
-    }
-
-    onCardAction = (id) => {
-        this.view.openComplainModal();
-    }
-
-    closeComplainModal = (id) => {
-        this.modalForm.openModal(id);
-        this.modalForm.closeComplainModal();
-    }
-
-    sendComplain = (id) => {
-        this.modalForm.sendComplain(id);
-    }
-
-    addCardBoard = (name, id) => {
-        if (this.model.getLocal() === null) {
-            this.model.saveLocal(name, id);
-            this.modalForm.openAddedAlert(id);
-        } else if ((this.model.getLocal().find(element => element.nameBoard === name && element.id === id))) {
-            this.modalForm.openModalAlert(id);
-        } else if
-            ((this.model.getLocal().find(element => element.nameBoard === name && element.id === id)) === undefined) {
-            this.modalForm.openAddedAlert(id);
-            this.model.saveLocal(name, id);
+    cleanAllBoards = () => {
+        if (this.model.getLocal().length === 0) {
+            alert("nothing to delete")
         }
+        else {
+            confirm("Are you sure?");
+            this.model.refreshLocal();
+        }
+        this.view.renderCards(this.model.getCards())
+        this.renderCountCardstart(boardNames);
+        this.view.removeBoardsInfo();
+    }
+
+    returnMain = () => {
+        this.view.renderCards(this.model.getCards());
+        this.view.removeBoardsInfo();
+        removeSearchElements();
+    }
+
+    returnToSearch = () => {
+        if (this.model.linkArr.length !== 0) {
+            this.view.removeBoardsInfo();
+            this.getSearch(this.model.getCurrentSearchPage());
+        } else this.returnMain()
+    }
+
+    cleanBoard = (name) => {
+        this.model.cleanBoard(name);
         this.renderCountCardItem(name);
-        this.modalForm.closeModalBoard();
+        const numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
+        this.view.removeBoardsInfo();
+        this.view.renderBoardInfo(name, numberCards)
+        if (numberCards === 0) {
+            this.view.renderEmptyList()
+        }
+    }
+
+    checkCardOnBoard = (id) => {
+        for (let key of boardNames) {
+            if (document.getElementById('board-info') && document.getElementById('board-info').getAttribute('name') === key) {
+                this.model.deleteCard(id, key);
+                this.view.removeBoardsInfo();
+                this.view.renderBoardInfo(key, this.model.cardStorage.filter(element => element.nameBoard === key).length);
+                this.renderCountCardItem(key);
+            }
+        }
     }
 
     renderCountCardItem = (name) => {
@@ -233,20 +243,6 @@ export class CardController {
         }
     }
 
-
-    addComplaint = (name, id) => {
-        if ([...document.getElementsByClassName('form-check-input')].find(item => { return item.checked })) {
-            if (this.model.getLocalForbidden() === null) {
-                this.model.saveLocalForbidden(name, id);
-            } else if ((this.model.getLocalForbidden().find(element => element.nameBoard === name && element.id === id))) {
-                alert('complaint already added')
-            } else if
-                ((this.model.getLocalForbidden().find(element => element.nameBoard === name && element.id === id)) === undefined) {
-                this.model.saveLocalForbidden(name, id);
-            }
-        }
-    }
-
     onCardAction = (action, payload = undefined) => {
         switch (action) {
             case CardAction.OpenFull:
@@ -255,9 +251,15 @@ export class CardController {
             case CardAction.OpenOptions:
                 this.openModal(payload);
                 break;
-            case CardAction.openComplainModal:
-                break;
         }
+    }
+
+    openPhoto = (src) => {
+        this.view.openPhoto(src);
+    }
+
+    openModal = (id) => {
+        this.modalForm.openModal(id);
     }
 
     initialize() {
@@ -270,4 +272,3 @@ export class CardController {
                 })
     }
 }
-

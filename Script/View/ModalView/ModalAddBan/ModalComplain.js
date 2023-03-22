@@ -1,7 +1,6 @@
 import { createComplainModal } from '../ModalAddBan/ModalComplain_utils.js';
 import { ModalAction } from '../../view_constants.js';
 
-
 export class ComplainModal {
     constructor(onModalAction) {
         this.modalComplainContainer = document.createElement('div');
@@ -17,5 +16,3 @@ export class ComplainModal {
 
 
 }
-
-
