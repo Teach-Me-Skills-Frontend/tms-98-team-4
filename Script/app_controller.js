@@ -79,6 +79,7 @@ export class CardController {
         }
     }
 
+
     openBoardModal = (id) => {
         this.modalForm.openBoardModal(id)
     }

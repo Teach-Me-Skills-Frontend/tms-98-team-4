@@ -164,3 +164,19 @@ window.onscroll = function () {
     }
     prevScrollpos = currentScrollPos;
 } 
+
+export function errorPage(err){
+    const root = document.getElementById('root');
+    const errorPage = document.createElement('div');
+    errorPage.classList.add('d-flex','justify-content-center','align-items-center','text-center','text-warning','error','bg-dark');
+    if(err = `SyntaxError: Unexpected token 'R', "Rate Limit Exceeded" is not valid JSON`){
+    errorPage.textContent = 'Rate Limit Exceeded. Try again later';
+    } else {
+    errorPage.textContent = err;
+    };
+    const appCard = document.querySelector('.app-card');
+    appCard.remove()
+    root.append(errorPage);
+    return root;
+}
+
