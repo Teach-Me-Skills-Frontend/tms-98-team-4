@@ -17,9 +17,11 @@ export function setPageURLs (linkArr, pageURLs) {
 
 export function setCurrPage(searchURL) {
     const currPage = document.getElementById('button_curr');
-    if (!searchURL.match(/(?<=&page=)(.*)(?=&per)/g)) {
+    const searchParams = new URLSearchParams(searchURL);
+
+    if (!searchParams.has('page')) {
         currPage.textContent = '1';
     } else{
-        currPage.textContent = searchURL.match(/(?<=&page=)(.*)(?=&per)/g)[0];
+        currPage.textContent = searchParams.get('page');
     }
 }

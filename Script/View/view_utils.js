@@ -139,9 +139,8 @@ export function addSearchInfo(searchURL, amount) {
     searchInfo.classList.add('search-info', 'container-sm', 'd-flex', 'justify-content-evenly');
 
     console.log(searchURL);
-
-    const searchQuery = searchURL.match(/(?<=per_page=28&query=)(.*)(?=)/g)[0];
-
+    const searchParams = new URLSearchParams(searchURL);
+    const searchQuery = searchParams.get('query');
     searchInfo.textContent = `${amount} pictures found for: "${searchQuery}"`;
 
     return searchInfo;
