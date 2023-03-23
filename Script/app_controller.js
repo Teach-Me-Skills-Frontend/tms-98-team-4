@@ -221,13 +221,13 @@ export class CardController {
 
         if (this.model.getLocal()) {
             numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
-            this.view.removeBoardsInfo();
             removeSearchElements();
-            this.view.renderBoardInfo(name, numberCards);
-        }
-
-        if (numberCards === 0) {
-            this.view.renderEmptyList()
+            
+            if (document.getElementById('board-info')) {
+                this.view.renderEmptyList();
+                this.view.removeBoardsInfo();
+                this.view.renderBoardInfo(name, numberCards);
+            }
         }
     }
 
