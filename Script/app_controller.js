@@ -196,7 +196,7 @@ export class CardController {
     }
 
     cleanAllBoards = () => {
-        if (this.model.getLocal().length === 0 || this.model.cardStorage === null) {
+        if (!this.model.getLocal() || this.model.getLocal().length === 0) {
             this.modalForm.openClearBoardsModalEmpty();
         }
         else {
@@ -218,9 +218,15 @@ export class CardController {
     cleanBoard = (name) => {
         this.model.cleanBoard(name);
         this.renderCountCardItem(name);
-        const numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
-        this.view.removeBoardsInfo();
-        this.view.renderBoardInfo(name, numberCards)
+        let numberCards = null;
+
+        if (this.model.getLocal()) {
+            numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
+            this.view.removeBoardsInfo();
+            removeSearchElements();
+            this.view.renderBoardInfo(name, numberCards);
+        }
+
         if (numberCards === 0) {
             this.view.renderEmptyList()
         }
@@ -248,17 +254,6 @@ export class CardController {
             this.view.removeBoardsInfo();
             this.getSearch(this.model.getCurrentSearchPage());
         } else this.returnMain()
-    }
-
-    cleanBoard = (name) => {
-        this.model.cleanBoard(name);
-        this.renderCountCardItem(name);
-        const numberCards = (this.model.getLocal().filter(element => element.nameBoard === name)).length;
-        this.view.removeBoardsInfo();
-        this.view.renderBoardInfo(name, numberCards)
-        if (numberCards === 0) {
-            this.view.renderEmptyList()
-        }
     }
 
     checkCardOnBoard = (id) => {
