@@ -96,9 +96,8 @@ export class CardController {
         if ([...document.getElementsByClassName('form-check-input')].find(item => { return item.checked })) {
             if (this.model.getLocalForbidden() === null) {
                 this.model.saveLocalForbidden(name, id);
-            } if ((this.model.getLocalForbidden().find(element => element.nameBoard === name && element.id === id))) {
-                alert('complaint already added')
-            } if
+            }
+            if
                 ((this.model.getLocalForbidden().find(element => element.nameBoard === name && element.id === id)) === undefined) {
                 this.model.saveLocalForbidden(name, id);
             }
